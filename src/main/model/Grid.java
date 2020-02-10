@@ -135,7 +135,7 @@ public class Grid {
             for (int j = 0; j < WIDTH; j++) {
                 line += grid[i][j].draw() + " ";
             }
-            System.out.println(line);
+            System.out.println(line + "\n");
         }
     }
 }
