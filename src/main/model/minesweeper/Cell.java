@@ -1,6 +1,4 @@
-package model;
-
-import com.sun.javafx.iio.gif.GIFImageLoaderFactory;
+package model.minesweeper;
 
 public class Cell {
     private boolean isOpen;
@@ -10,10 +8,8 @@ public class Cell {
 
     public Cell() {
         isOpen = false; //true if  cell is open, false if closed
-        //TODO change this when determined the mine generation method
         isMine = false; //true if cell is mine, false if not
         isFlagged = false; //true if cell is flagged, false if not or is open
-        //TODO change this when found a better way to solve this problem
         adjacentBombs = 0; //number of adjacent bombs, counts diagonal as adjacent
     }
 
@@ -28,6 +24,10 @@ public class Cell {
         if (isFlagged) {
             return "F";
         }
+//        if (isMine) {
+//            return "*";
+//        }
+        //return Integer.toString(adjacentBombs);
         return "#";
     }
 
@@ -38,20 +38,21 @@ public class Cell {
 
     //REQUIRES: must not be open
     //MODIFIES: this
-    //EFFECTS: returns false if the cell is a mine,
-    //         else, return true and change cell status to open and remove flag if necessary
+    //EFFECTS: returns true if the cell is a mine,
+    //         else, return false and change cell status to open and remove flag if necessary
     public boolean openCell() {
-        if (this.isMine = true) {
-            return false;
+        if (isMine) {
+            System.out.println("Game Over");
+            return true;
         }
         this.isOpen = true;
         this.isFlagged = false;
-        return true;
-        //TODO add/change something that explodes in case this is a bomb
+        return false;
     }
 
     public void makeMine() {
         isMine = true;
+        adjacentBombs = -1;
     }
 
     //EFFECTS: return true if cell is a mine, else return false
@@ -60,7 +61,7 @@ public class Cell {
     }
 
     //EFFECTS: return true if cell is marked with flag, else return false
-    public boolean getIsMarked() {
+    public boolean getIsFlagged() {
         return isFlagged;
     }
 

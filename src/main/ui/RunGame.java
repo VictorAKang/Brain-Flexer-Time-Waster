@@ -1,5 +1,12 @@
 package ui;
 
-public class RunGame {
+import model.minesweeper.RegularMinesweeper;
 
+public class RunGame {
+    RegularMinesweeper game;
+
+    public RunGame() {
+        game = new RegularMinesweeper();
+        game.runGame();
+    }
 }

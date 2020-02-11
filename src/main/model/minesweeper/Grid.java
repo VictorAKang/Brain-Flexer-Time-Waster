@@ -1,6 +1,5 @@
-package model;
+package model.minesweeper;
 
-import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -102,8 +101,8 @@ public class Grid {
             maxJ = j;
         }
 
-        for (int p = minI; p < maxI; p++) {
-            for (int q = minJ; q < maxJ; q++) {
+        for (int p = minI; p <= maxI; p++) {
+            for (int q = minJ; q <= maxJ; q++) {
                 if (grid[p][q].getIsMine()) {
                     answer++;
                 }
@@ -118,7 +117,7 @@ public class Grid {
     //EFFECTS: print a representation of the grid with a coordinate system on its edges
     public void drawGrid() {
         String line;
-        System.out.println("    A B C D E F G H I J K L M N O P");
+        System.out.println("    a b c d e f g h i j k l m n o p\n");
 
         for (int i = 0; i < 9; i++) {
             line = "";
@@ -126,7 +125,7 @@ public class Grid {
             for (int j = 0; j < WIDTH; j++) {
                 line += grid[i][j].draw() + " ";
             }
-            System.out.println(line);
+            System.out.println(line + "\n");
         }
 
         for (int i = 9; i < HEIGHT; i++) {
@@ -137,5 +136,50 @@ public class Grid {
             }
             System.out.println(line + "\n");
         }
+    }
+
+    public boolean openCell(int coordinateX, int coordinateY) {
+        boolean returnValue;
+        returnValue = grid[coordinateY][coordinateX].openCell();
+
+        openAdjacent(coordinateX, coordinateY);
+
+        return returnValue;
+    }
+
+    public void openAdjacent(int coordinateX, int coordinateY) {
+        boolean stubVar;
+
+        if (grid[coordinateY][coordinateX].getAdjacentBombs() == 0) {
+            int minI = coordinateY - 1;
+            int maxI = coordinateY + 1;
+            int minJ = coordinateX - 1;
+            int maxJ = coordinateX + 1;
+
+            if (coordinateY == 0) {
+                minI = coordinateY;
+            } else if (coordinateY == HEIGHT - 1) {
+                maxI = coordinateY;
+            }
+
+            if (coordinateX == 0) {
+                minJ = coordinateX;
+            } else if (coordinateX == WIDTH - 1) {
+                maxJ = coordinateX;
+            }
+
+            for (int i = minI; i <= maxI; i++) {
+                for (int j = minJ; j <= maxJ; j++) {
+                    if ((!(i == coordinateY && j == coordinateX)) && !grid[i][j].getIsOpen()) {
+                        stubVar = grid[i][j].openCell();
+                        openAdjacent(j, i);
+                    }
+                }
+            }
+        }
+    }
+
+    public void flagCell(int coordinateX, int coordinateY) {
+        grid[coordinateY][coordinateX].changeMarking();
     }
 }
