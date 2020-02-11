@@ -59,7 +59,7 @@ public class RegularMinesweeper {
 
         coordinateY = input.nextInt() - 1;
 
-        if (coordinateY > Grid.HEIGHT || coordinateY < 0) {
+        if (coordinateY > Grid.HEIGHT - 1 || coordinateY < 0) {
             System.out.println("invalid input...");
             return askCoordinateY();
         }
