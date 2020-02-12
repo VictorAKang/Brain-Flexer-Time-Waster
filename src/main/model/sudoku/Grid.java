@@ -1,22 +1,22 @@
 package model.sudoku;
 
 public class Grid {
+    SeedBank bank = new SeedBank();
     Cell[][] grid;
 
     public Grid() {
         grid = new Cell[9][9];
-        Seed seed = new Seed();
-        seedToGrid(seed.toString());
+        seedToGrid(bank.getSeed());
     }
 
-    public void seedToGrid(String seed) {
+    public void seedToGrid(Seed seed) {
         Cell accessPoint;
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                accessPoint = new Cell(seed.charAt(81 + j + (i * 9)));
+                accessPoint = new Cell(seed.getActualSeed().charAt(j + (i * 9)));
 
-                if (Character.isDigit(seed.charAt(j + (i * 9)))) {
+                if (Character.isDigit(seed.getVisibleSeed().charAt(j + (i * 9)))) {
                     accessPoint.makeStatic();
                 }
 
@@ -55,7 +55,9 @@ public class Grid {
     }
 
     private void drawSolidLine() {
-        System.out.println("——————————————+——————————————+——————————————");
+        System.out.print("——————————————+——————————————+——————————————+");
+        System.out.print("——————————————+——————————————+——————————————+");
+        System.out.print("——————————————+——————————————+——————————————");
     }
 
     private void drawDottedLine() {
@@ -71,7 +73,7 @@ public class Grid {
             System.out.print("         :         ");
             grid[i][3 * j + 2].printCurrentValue();
             if (j != 2) {
-                System.out.print("         |");
+                System.out.print("        |");
             }
         }
         System.out.println();

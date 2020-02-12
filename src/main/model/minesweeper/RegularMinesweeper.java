@@ -11,6 +11,7 @@ public class RegularMinesweeper {
         isGameOver = false;
     }
 
+    //EFFECTS: runs game
     public void runGame() {
         int cellsToBeOpen = Grid.TOTAL_NUM_CELLS - Grid.NUM_MINES;
         System.out.println("Welcome to minesweeper!\n");
@@ -41,7 +42,8 @@ public class RegularMinesweeper {
         }
     }
 
-    private int askCoordinateY() {
+    //EFFECTS: ask the user to input the y coordinate of the cell that he/she wishes to change
+    public int askCoordinateY() {
         //TODO implement exception in case a string is inputted here
         Scanner input = new Scanner(System.in);
         //String stringCoordinateY;
@@ -67,7 +69,8 @@ public class RegularMinesweeper {
         return coordinateY;
     }
 
-    private int askCoordinateX() {
+    //EFFECTS: ask the user to input the x coordinate of the cell that he/she wishes to change
+    public int askCoordinateX() {
         Scanner input = new Scanner(System.in);
         String letterCoordinateX;
         int coordinateX;
@@ -91,7 +94,8 @@ public class RegularMinesweeper {
 
     }
 
-    private String askCommand() {
+    //EFFECTS: ask the user to input the command he/she wishes to execute on referenced cell
+    public String askCommand() {
         Scanner input = new Scanner(System.in);
         String command;
 
@@ -106,13 +110,13 @@ public class RegularMinesweeper {
         return askCommand();
     }
 
-    private void runCommand(int coordinateX, int coordinateY, String command) {
+    //
+    //TODO add conditions to guarantee that the command can be executed
+    public void runCommand(int coordinateX, int coordinateY, String command) {
         if (command.equals("open")) {
             isGameOver = map.openCell(coordinateX, coordinateY);
         } else {
             map.flagCell(coordinateX, coordinateY);
         }
     }
-
-    //TODO end game if all mines were flagged and all non mine cells were open
 }

@@ -1,19 +1,21 @@
 package model.minesweeper;
 
+// this class represents a single cell of the grid
+// an object of this class stores whether the cell has been opened, if it is a mine, if it is flagged,
+// and how many mines it has adjacent to it (if the cell at question is not a mine)
 public class Cell {
-    private boolean isOpen;
-    private boolean isMine;
-    private boolean isFlagged;
-    private int adjacentBombs;
+    private boolean isOpen; //true if  cell is open, false if closed
+    private boolean isMine; //true if cell is mine, false if not
+    private boolean isFlagged; //true if cell is flagged, false if not or is open
+    private int adjacentBombs; //number of adjacent bombs, counts diagonal as adjacent
 
     public Cell() {
-        isOpen = false; //true if  cell is open, false if closed
-        isMine = false; //true if cell is mine, false if not
-        isFlagged = false; //true if cell is flagged, false if not or is open
-        adjacentBombs = 0; //number of adjacent bombs, counts diagonal as adjacent
+        isOpen = false;
+        isMine = false;
+        isFlagged = false;
+        adjacentBombs = 0;
     }
 
-    //REQUIRES: cell must not be an open bomb
     //EFFECTS: returns adjacentBombs in case it is open
     //                 F if cell is closed and isFlagged
     //                 # if cell is closed
@@ -24,10 +26,6 @@ public class Cell {
         if (isFlagged) {
             return "F";
         }
-//        if (isMine) {
-//            return "*";
-//        }
-        //return Integer.toString(adjacentBombs);
         return "#";
     }
 
@@ -50,6 +48,8 @@ public class Cell {
         return false;
     }
 
+    //MODIFIES: this
+    //EFFECTS: makes this cell a mine
     public void makeMine() {
         isMine = true;
         adjacentBombs = -1;
@@ -60,16 +60,15 @@ public class Cell {
         return isMine;
     }
 
-    //EFFECTS: return true if cell is marked with flag, else return false
-    public boolean getIsFlagged() {
-        return isFlagged;
-    }
-
     //REQUIRES: cell must be closed
     //MODIFIES: this
     //EFFECTS: change the status of whether cell is flagged or not
     public void changeMarking() {
         this.isFlagged = !this.isFlagged;
+    }
+
+    public boolean isFlagged() {
+        return isFlagged;
     }
 
     //EFFECTS: return the amount of bombs adjacent to cell

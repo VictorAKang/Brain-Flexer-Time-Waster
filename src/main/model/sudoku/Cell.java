@@ -47,15 +47,17 @@ public class Cell {
     }
 
     public void printCurrentValue() {
-        if (currentValue == 0) {
-            System.out.print(" ");
-            return;
-        }
-        System.out.print(currentValue);
+//        if (currentValue == 0) {
+//            System.out.print(" ");
+//            return;
+//        }
+//        System.out.print(currentValue);
+//        System.out.print(trueValue);
+        System.out.print(" ");
     }
 
     public void printPossibilities() {
-        String printable = "";
+        String printable = " ";
         int freeSpaces = 9 - possibilities.size();;
 
         for (int k = 0; k < freeSpaces; k++) {

@@ -3,13 +3,15 @@ package model.minesweeper;
 import java.util.ArrayList;
 import java.util.Random;
 
+// represents the whole grid where the game will be played
+// stores references to all cells that are part of the game
 public class Grid {
     static final int WIDTH = 16;
     static final int HEIGHT = 30;
     static final int NUM_MINES = 99;
     static final int TOTAL_NUM_CELLS = WIDTH * HEIGHT;
 
-    private Cell[][] grid; //represents the field in the current state of the game
+    public Cell[][] grid; //represents the field in the current state of the game
 
     public Grid() {
         grid = new Cell[HEIGHT][WIDTH];
@@ -51,7 +53,7 @@ public class Grid {
     //REQUIRES: input array must be of size TOTAL_NUM_CELLS
     //MODIFIES: input list
     //EFFECTS: shuffles the inputted list
-    private ArrayList<Cell> shuffle(ArrayList<Cell> toBeRandomized) {
+    public ArrayList<Cell> shuffle(ArrayList<Cell> toBeRandomized) {
         Cell helperCell;
         Random rand = new Random();
         int swapIndex;
@@ -71,7 +73,7 @@ public class Grid {
 
     //MODIFIES: this
     //EFFECTS: set the value of adjacentMines of all nonMineCells to the correct value
-    private void setAllNonMineCells() {
+    public void setAllNonMineCells() {
         for (int i = 0; i < HEIGHT; i++) {
             for (int j = 0; j < WIDTH; j++) {
                 if (!grid[i][j].getIsMine()) {
@@ -82,7 +84,7 @@ public class Grid {
     }
 
     //EFFECTS: returns the number of adjacent mines relative to a cell in the grid
-    private int findAdjacentMines(int i, int j) {
+    public int findAdjacentMines(int i, int j) {
         int answer = 0;
         int minI = i - 1;
         int maxI = i + 1;
@@ -138,6 +140,10 @@ public class Grid {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: open the referenced cell and executes openAdjacent if referenced cell is not a mine and has no adjacent
+    //         ones
+    //         returns true if cell is a mine and false if not
     public boolean openCell(int coordinateX, int coordinateY) {
         boolean returnValue;
         returnValue = grid[coordinateY][coordinateX].openCell();
@@ -147,8 +153,10 @@ public class Grid {
         return returnValue;
     }
 
+    //MODIFIES: this
+    //EFFECTS: open all adjacent cells if the inputted one has 0 adjacent bombs, else do nothing
+    //         repeats process for all adjacent bombs
     public void openAdjacent(int coordinateX, int coordinateY) {
-        boolean stubVar;
 
         if (grid[coordinateY][coordinateX].getAdjacentBombs() == 0) {
             int minI = coordinateY - 1;
@@ -168,18 +176,54 @@ public class Grid {
                 maxJ = coordinateX;
             }
 
-            for (int i = minI; i <= maxI; i++) {
-                for (int j = minJ; j <= maxJ; j++) {
-                    if ((!(i == coordinateY && j == coordinateX)) && !grid[i][j].getIsOpen()) {
-                        stubVar = grid[i][j].openCell();
-                        openAdjacent(j, i);
-                    }
+            openAdjacentHelper(coordinateX, coordinateY, minI,maxI,minJ,maxJ);
+        }
+    }
+
+    public void openAdjacentHelper(int coordinateX, int coordinateY, int minI, int maxI, int minJ, int maxJ) {
+        boolean stubVar;
+
+        for (int i = minI; i <= maxI; i++) {
+            for (int j = minJ; j <= maxJ; j++) {
+                if ((!(i == coordinateY && j == coordinateX)) && !grid[i][j].getIsOpen()) {
+                    stubVar = grid[i][j].openCell();
+                    openAdjacent(j, i);
                 }
             }
         }
     }
 
+    //MODIFIES: referenced cell
+    //EFFECTS: change the state of isFlagged of the referenced cell
     public void flagCell(int coordinateX, int coordinateY) {
         grid[coordinateY][coordinateX].changeMarking();
     }
+
+//    public int countMines() {
+//        int answer = 0;
+//
+//        for (Cell[] c: grid) {
+//            for (Cell cell: c) {
+//                if (cell.getIsMine()) {
+//                    answer++;
+//                }
+//            }
+//        }
+//
+//        return answer;
+//    }
+//
+//    public int countNotMines() {
+//        int answer = 0;
+//
+//        for (Cell[] c: grid) {
+//            for (Cell cell: c) {
+//                if (!cell.getIsMine()) {
+//                    answer++;
+//                }
+//            }
+//        }
+//
+//        return answer;
+//    }
 }
