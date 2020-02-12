@@ -1,4 +1,6 @@
-package model.minesweeper;
+package ui;
+
+import model.minesweeper.Grid;
 
 import java.util.Scanner;
 

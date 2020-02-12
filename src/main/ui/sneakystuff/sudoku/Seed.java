@@ -1,8 +1,5 @@
-package model.sudoku;
+package ui.sneakystuff.sudoku;
 
-import com.sun.javafx.collections.ImmutableObservableList;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Seed {

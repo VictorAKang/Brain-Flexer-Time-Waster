@@ -1,4 +1,4 @@
-package model.sudoku;
+package ui.sneakystuff.sudoku;
 
 import java.util.Scanner;
 

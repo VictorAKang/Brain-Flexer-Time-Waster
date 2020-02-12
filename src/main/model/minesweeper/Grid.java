@@ -7,9 +7,9 @@ import java.util.Random;
 // stores references to all cells that are part of the game
 public class Grid {
     static final int WIDTH = 16;
-    static final int HEIGHT = 30;
-    static final int NUM_MINES = 99;
-    static final int TOTAL_NUM_CELLS = WIDTH * HEIGHT;
+    public static final int HEIGHT = 30;
+    public static final int NUM_MINES = 99;
+    public static final int TOTAL_NUM_CELLS = WIDTH * HEIGHT;
 
     public Cell[][] grid; //represents the field in the current state of the game
 

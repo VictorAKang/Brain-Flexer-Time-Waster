@@ -1,4 +1,4 @@
-package model.sudoku;
+package ui.sneakystuff.sudoku;
 
 public class Grid {
     SeedBank bank = new SeedBank();

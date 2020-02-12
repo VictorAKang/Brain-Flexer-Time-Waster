@@ -1,7 +1,6 @@
 package ui;
 
-import model.minesweeper.RegularMinesweeper;
-import model.sudoku.RegularSudoku;
+import ui.sneakystuff.sudoku.RegularSudoku;
 
 import java.util.Scanner;
 
@@ -15,25 +14,27 @@ public class RunGame {
 
     public RunGame() {
         playAgain = true;
+        gameMS = new RegularMinesweeper();
+        gameMS.runGame();
 
-        while (playAgain) {
-            System.out.print("Which game do you wanna play? (1 - minesweeper, 2 - sudoku) ");
-            gameMode = input.nextInt();
-
-            while (gameMode != 1 && gameMode != 2) {
-                System.out.println("invalid input...");
-                System.out.print("Which game do you wanna play? (1 - minesweeper, 2 - sudoku) ");
-                gameMode = input.nextInt();
-            }
-
-            if (gameMode == 1) {
-                gameMS = new RegularMinesweeper();
-                gameMS.runGame();
-            } else {
-                gameS = new RegularSudoku();
-                gameS.runGame();
-            }
-
-        }
+//        while (playAgain) {
+//            System.out.print("Which game do you wanna play? (1 - minesweeper, 2 - sudoku) ");
+//            gameMode = input.nextInt();
+//
+//            while (gameMode != 1 && gameMode != 2) {
+//                System.out.println("invalid input...");
+//                System.out.print("Which game do you wanna play? (1 - minesweeper, 2 - sudoku) ");
+//                gameMode = input.nextInt();
+//            }
+//
+//            if (gameMode == 1) {
+//                gameMS = new RegularMinesweeper();
+//                gameMS.runGame();
+//            } else {
+//                gameS = new RegularSudoku();
+//                gameS.runGame();
+//            }
+//
+//        }
     }
 }

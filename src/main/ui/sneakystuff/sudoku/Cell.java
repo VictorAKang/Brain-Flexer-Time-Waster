@@ -1,8 +1,7 @@
-package model.sudoku;
+package ui.sneakystuff.sudoku;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 
 public class Cell {
     int trueValue;
