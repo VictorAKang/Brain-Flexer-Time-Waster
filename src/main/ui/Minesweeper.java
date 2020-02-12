@@ -5,11 +5,31 @@ import model.minesweeper.Grid;
 import java.util.Scanner;
 
 // represents the functional runner of minesweeper
-public class Minesweeper {
+public class Minesweeper implements Game {
+    String description = "minesweeper";
     Grid map;
     boolean isGameOver;
 
+    //MODIFIES: this
+    //EFFECTS: generates game and runs it
     public Minesweeper() {
+        map = new Grid();
+        isGameOver = false;
+        runGame();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: generates game
+    public Minesweeper(int i) {
+        map = new Grid();
+        isGameOver = false;
+    }
+
+    //REQUIRES: generated game
+    //EFFECTS: runs game
+    @Override
+    public void runGame(int i) {
+        runGame();
         map = new Grid();
         isGameOver = false;
     }
@@ -121,5 +141,11 @@ public class Minesweeper {
         } else {
             map.flagCell(coordinateX, coordinateY);
         }
+    }
+
+    //EFFECTS: returns the description
+    @Override
+    public String getDescription() {
+        return description;
     }
 }

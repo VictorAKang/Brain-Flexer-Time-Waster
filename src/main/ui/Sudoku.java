@@ -5,10 +5,27 @@ import model.sudoku.Grid;
 import java.util.Scanner;
 
 // represents the functional runner of sudoku
-public class Sudoku {
+public class Sudoku implements Game {
+    String description = "sudoku";
     Grid game;
 
+    //MODIFIES: this
+    //EFFECTS: generates game and runs it
     public Sudoku() {
+        game = new Grid();
+        runGame();
+    }
+
+    //MODIFIES: this
+    //EFFECTS: generates game
+    public Sudoku(int i) {
+        game = new Grid();
+    }
+
+    //REQUIRES: generated game
+    //EFFECTS: runs game
+    public void runGame(int i) {
+        runGame();
         game = new Grid();
     }
 
@@ -93,5 +110,11 @@ public class Sudoku {
         }
 
         return coordinateX;
+    }
+
+    //EFFECTS: returns the description
+    @Override
+    public String getDescription() {
+        return description;
     }
 }
