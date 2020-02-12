@@ -1,4 +1,4 @@
-package model;
+package model.minesweeper;
 
 import model.minesweeper.Cell;
 import org.junit.jupiter.api.BeforeEach;

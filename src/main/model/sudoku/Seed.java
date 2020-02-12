@@ -1,21 +1,15 @@
-package ui.sneakystuff.sudoku;
+package model.sudoku;
 
 import java.util.Random;
 
 public class Seed {
     String actualSeed;
     String visibleSeed;
-    Random rand = new Random();
+    //Random rand = new Random();
 
     public Seed(String actualSeed, String visibleSeed) {
         this.actualSeed = actualSeed;
         this.visibleSeed = visibleSeed;
-
-//        seeds = new ArrayList<>();
-//        setupSeeds();
-//        seed = randomizeSeed(seeds.get(rand.nextInt(seeds.size())));
-//        System.out.println(seed);
-
     }
 
     public String getActualSeed() {
@@ -25,11 +19,11 @@ public class Seed {
     public String getVisibleSeed() {
         return visibleSeed;
     }
-
-    private Seed randomizeSeed(Seed s) {
-        //TODO make this work
-        return s;
-    }
+//
+//    private Seed randomizeSeed(Seed s) {
+//        //TODO make this work
+//        return s;
+//    }
 
 //    private void setupSeeds() {
 //        String seed1 = "..3.861....47...8....2...6.4.........82....5......392.346..8..5.7...9.....5.6...2"

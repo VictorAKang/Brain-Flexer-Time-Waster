@@ -1,62 +1,39 @@
-package ui.sneakystuff.sudoku;
+package ui;
+
+import model.sudoku.Grid;
 
 import java.util.Scanner;
 
-public class RegularSudoku {
-    Grid map;
+// represents the functional runner of sudoku
+public class Sudoku {
+    Grid game;
 
-    public RegularSudoku() {
-        map = new Grid();
+    public Sudoku() {
+        game = new Grid();
     }
 
+    //MODIFIES: this
+    //EFFECTS: runs game
     public void runGame() {
         int coordinateX;
         int coordinateY;
         int value;
-        int mode; //1 for note mode, 0 for change currentValue mode
 
-        System.out.println("Welcome to Sudoku!\n");
-
-        while (!map.gameComplete()) {
-            map.drawGrid();
+        while (!game.gameComplete()) {
+            game.drawGrid();
             System.out.println();
 
             coordinateX = askCoordinateX();
             coordinateY = askCoordinateY();
-            mode = askMode();
             value = askValue();
 
-            runCommand(coordinateY, coordinateX, value, mode);
+            game.changeCellValue(coordinateY, coordinateX, value);
             System.out.println();
         }
     }
 
-    private void runCommand(int i, int j, int value, int mode) {
-        if (mode == 1) {
-            map.addPossibility(i, j, value);
-        } else if (mode == 0) {
-            map.changeCurrentValue(i, j, value);
-        } else {
-            //TODO something about the case in which value is not in possibilities
-            map.removePossibility(i, j, value);
-        }
-    }
-
-    private int askMode() {
-        Scanner input = new Scanner(System.in);
-        int mode;
-
-        System.out.print("Choose what mode you want to use (0 - not note, 1 - note, 2 - remove note): ");
-        mode = input.nextInt();
-
-        if (mode == 1 || mode == 0 || mode == 2) {
-            return mode;
-        }
-
-        System.out.println("invalid input...");
-        return askMode();
-    }
-
+    //EFFECTS: asks the user to input the value to be inputted into a cell
+    //         and reads that input
     private int askValue() {
         //TODO implement exception in case a string is inputted here
         Scanner input = new Scanner(System.in);
@@ -74,6 +51,8 @@ public class RegularSudoku {
         return value;
     }
 
+    //EFFECTS: asks the user to input the value of the y coordinate of the cell he/she wants to change
+    //         and reads that input
     private int askCoordinateY() {
         //TODO implement exception in case a string is inputted here
         Scanner input = new Scanner(System.in);
@@ -91,6 +70,8 @@ public class RegularSudoku {
         return coordinateY;
     }
 
+    //EFFECTS: asks the user to input the value to x coordinate of the cell he/she wants to change
+    //         and reads that input
     private int askCoordinateX() {
         Scanner input = new Scanner(System.in);
         String letterCoordinateX;

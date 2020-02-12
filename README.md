@@ -1,32 +1,28 @@
-# 
+# Puzzle Hub
 
-## a brief description 
+## A brief description 
 
-The application will be a hub of puzzle games - like minesweeper and sudoku - and its variations and alternative rules -
-like knight sweeper and thermometer sudoku. This application is made for people to either train their brains or to just 
-pass time. The motivation of this project came from my search for good puzzle game apps.
+In an attempt to find quick games for me to play while waiting on line or just procrastinating, I decided to develop 
+this application. This application is a hub where one can entertain oneself by playing puzzle games that are *randomly*
+ generated while waiting for time to pass.
 
-## stories
-public String iWantTo(String s) {
-    return "As a user, I want to be able to" + s;
-}
+The choices of games are:
+- Sudoku
+- Minesweeper
 
-iWantTo("play a functional game of minesweeper.");
+## Stories
 
-iWantTo("open a square or mark it as a bomb.");
+As a user, I would like to be able to play a randomly generated minesweeper game.
+As a user, I would like to be able to open or flag a cell in minesweeper.
+As a user, I would like to lose the game if I open a mine cell in minesweeper.
+As a user, I would like to win the game if I correctly identify all mines in minesweeper.
 
-iWantTo("play a solvable sudoku puzzle.");
+As a user, I would like to be able to play sudoku.
+As a user, I would like to be able to attribute values to cells in sudoku.
+As a user, I would like to win the game if I correctly identify the value of all cells in sudoku.
 
-iWantTo("add a value to a space.");
+As a user, I would like to be able to choose the game I am playing and switch between them.
+As a user, I would like to be able to see my favourite games list and add new games to it.
 
-iWantTo("have all the assist tools that a good sudoku app has - like noting what can enter in each space.");
 
-iWantTo("change the game I'm playin
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
-
-An example of text with **bold** and *italic* fonts.  Note that the IntelliJ markdown previewer doesn't seem to render 
-the bold and italic fonts correctly but they will appear correctly on GitHub.

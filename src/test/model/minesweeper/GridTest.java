@@ -1,4 +1,4 @@
-package model;
+package model.minesweeper;
 
 import model.minesweeper.Cell;
 import model.minesweeper.Grid;

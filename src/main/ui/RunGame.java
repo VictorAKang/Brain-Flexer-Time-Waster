@@ -1,21 +1,21 @@
 package ui;
 
-import ui.sneakystuff.sudoku.RegularSudoku;
-
 import java.util.Scanner;
 
 public class RunGame {
     Scanner input = new Scanner(System.in);
-    RegularMinesweeper gameMS;
-    RegularSudoku gameS;
+    Minesweeper gameMS;
+    Sudoku gameS;
     boolean playAgain;
     int gameMode;
 
 
     public RunGame() {
         playAgain = true;
-        gameMS = new RegularMinesweeper();
+        gameMS = new Minesweeper();
+        gameS = new Sudoku();
         gameMS.runGame();
+        gameS.runGame();
 
 //        while (playAgain) {
 //            System.out.print("Which game do you wanna play? (1 - minesweeper, 2 - sudoku) ");

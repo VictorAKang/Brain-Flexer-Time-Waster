@@ -4,19 +4,20 @@ import model.minesweeper.Grid;
 
 import java.util.Scanner;
 
-public class RegularMinesweeper {
+// represents the functional runner of minesweeper
+public class Minesweeper {
     Grid map;
     boolean isGameOver;
 
-    public RegularMinesweeper() {
+    public Minesweeper() {
         map = new Grid();
         isGameOver = false;
     }
 
+    //MODIFIES: this
     //EFFECTS: runs game
     public void runGame() {
         int cellsToBeOpen = Grid.TOTAL_NUM_CELLS - Grid.NUM_MINES;
-        System.out.println("Welcome to minesweeper!\n");
         int coordinateX;
         int coordinateY;
         String command;
