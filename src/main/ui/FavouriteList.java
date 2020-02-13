@@ -1,6 +1,5 @@
 package ui;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -9,7 +8,7 @@ public class FavouriteList {
     LinkedList<Game> favList;
 
     public FavouriteList() {
-        favList = new LinkedList<Game>();
+        favList = new LinkedList<>();
     }
 
     //MODIFIES: this
@@ -37,8 +36,6 @@ public class FavouriteList {
             addFav();
         } else if (stubInput.equals("3")) {
             removeFav();
-        } else {
-            return;
         }
     }
 
@@ -86,8 +83,6 @@ public class FavouriteList {
             if (!containGame("minesweeper")) {
                 favList.add(new Minesweeper(1));
             }
-        } else {
-            return;
         }
     }
 

@@ -9,12 +9,13 @@ public class Grid {
         grid = new Cell[9][9];
         seed = new Seed("523986147164735289897241563439512678782694351651873924346128795278359416915467832",
                 "..3.861....47...8....2...6.4.........82....5......392.346..8..5.7...9.....5.6...2");
-        seedToGrid(new Seed(seed));
+        seedToGrid();
     }
 
     //MODIFIES: this
     //EFFECTS: use seed to generate the board
-    public void seedToGrid(Seed seed) {
+    public void seedToGrid() {
+        Seed seed = new Seed();
         Cell accessPoint;
 
         for (int i = 0; i < 9; i++) {

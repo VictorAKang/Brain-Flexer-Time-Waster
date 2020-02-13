@@ -14,8 +14,9 @@ public class Seed {
         this.visibleSeed = visibleSeed;
     }
 
-    public Seed(Seed seed) {
-        randomizeSeed(seed);
+    public Seed() {
+        SeedBank bank = new SeedBank();
+        randomizeSeed(bank.getSeed());
     }
 
     public String getActualSeed() {
@@ -27,7 +28,6 @@ public class Seed {
     }
 
     private void randomizeSeed(Seed s) {
-        //TODO make this work
         ArrayList<Integer> num = new ArrayList<>();
 
         for (int i = 1; i < 10; i++) {
