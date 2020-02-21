@@ -145,6 +145,11 @@ public class Grid {
     //         ones
     //         returns true if cell is a mine and false if not
     public boolean openCell(int coordinateX, int coordinateY) {
+        if (grid[coordinateY][coordinateX].isFlagged()) {
+            System.out.println("cell is flagged");
+            return true;
+        }
+
         boolean returnValue;
         returnValue = grid[coordinateY][coordinateX].openCell();
 
@@ -180,6 +185,8 @@ public class Grid {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: opens all adjacent cells and calls this function for all adjacent ones that are 0
     public void openAdjacentHelper(int coordinateX, int coordinateY, int minI, int maxI, int minJ, int maxJ) {
         boolean stubVar;
 
@@ -199,31 +206,4 @@ public class Grid {
         grid[coordinateY][coordinateX].changeMarking();
     }
 
-//    public int countMines() {
-//        int answer = 0;
-//
-//        for (Cell[] c: grid) {
-//            for (Cell cell: c) {
-//                if (cell.getIsMine()) {
-//                    answer++;
-//                }
-//            }
-//        }
-//
-//        return answer;
-//    }
-//
-//    public int countNotMines() {
-//        int answer = 0;
-//
-//        for (Cell[] c: grid) {
-//            for (Cell cell: c) {
-//                if (!cell.getIsMine()) {
-//                    answer++;
-//                }
-//            }
-//        }
-//
-//        return answer;
-//    }
 }

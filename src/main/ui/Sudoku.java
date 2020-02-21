@@ -1,6 +1,7 @@
 package ui;
 
 import model.sudoku.Grid;
+import persistence.Saveable;
 
 import java.util.Scanner;
 

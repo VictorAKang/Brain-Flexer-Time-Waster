@@ -1,7 +1,9 @@
 package ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+// main menu that leads to all other applications
 public class MainMenu {
     int option;
     boolean keepGoing;
@@ -53,7 +55,11 @@ public class MainMenu {
         } else if (option == 2) {
             new Sudoku();
         } else {
-            fav.runFavList();
+            try {
+                fav.runFavList();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

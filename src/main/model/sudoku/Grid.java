@@ -1,6 +1,6 @@
 package model.sudoku;
 
-// represents the entire board
+// represents the entire sudoku board
 public class Grid {
     Seed seed;
     Cell[][] grid;

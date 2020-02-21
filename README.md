@@ -24,5 +24,8 @@ As a user, I would like to win the game if I correctly identify the value of all
 As a user, I would like to be able to choose the game I am playing and switch between them.
 As a user, I would like to be able to see my favourite games list and add new games to it and remove games from it.
 
+As a user, I would like to be able to have my favourite games list saved.
+As a user, I would like to see my favourite games list as I left off when reopening the app.
+
 
 

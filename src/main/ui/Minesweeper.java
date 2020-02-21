@@ -1,6 +1,9 @@
 package ui;
 
+import com.oracle.javafx.jmx.json.JSONWriter;
 import model.minesweeper.Grid;
+import netscape.javascript.JSObject;
+import persistence.Saveable;
 
 import java.util.Scanner;
 
@@ -67,24 +70,24 @@ public class Minesweeper implements Game {
 
     //EFFECTS: ask the user to input the y coordinate of the cell that he/she wishes to change
     public int askCoordinateY() {
-        //TODO implement exception in case a string is inputted here
         Scanner input = new Scanner(System.in);
-        //String stringCoordinateY;
+        String stringCoordinateY;
         int coordinateY;
 
         System.out.print("Y coordinate (e.g. 1, 2, 3): ");
-//        stringCoordinateY = input.next();
-//
-//        if (stringCoordinateY.length() != 1 || ! Character.isDigit(stringCoordinateY.charAt(0))) {
-//            System.out.println("invalid input...");
-//            return askCoordinateY();
-//        }
-//
-//        coordinateY = Integer.parseInt(stringCoordinateY) - 1;
+        stringCoordinateY = input.next();
 
-        coordinateY = input.nextInt() - 1;
+        if (!(stringCoordinateY.length() == 1 && Character.isDigit(stringCoordinateY.charAt(0)))) {
+            System.out.println("invalid input...");
+            return askCoordinateY();
+        }
+
+        coordinateY = (int)stringCoordinateY.charAt(0) - (int)'1';
+//
+//        coordinateY = input.nextInt() - 1;
 
         if (coordinateY > Grid.HEIGHT - 1 || coordinateY < 0) {
+            System.out.println(coordinateY);
             System.out.println("invalid input...");
             return askCoordinateY();
         }

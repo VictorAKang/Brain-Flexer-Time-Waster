@@ -1,11 +1,18 @@
 package ui;
 
+import persistence.FavouriteListReader;
+import persistence.Saveable;
+import persistence.Writer;
+
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 // represents the list of favourite games
-public class FavouriteList {
-    LinkedList<Game> favList;
+public class FavouriteList implements Saveable {
+    public static final String FAV_LIST = "./data/favouriteList.txt";
+    Scanner input = new Scanner(System.in);
+    public LinkedList<Game> favList;
 
     public FavouriteList() {
         favList = new LinkedList<>();
@@ -13,36 +20,41 @@ public class FavouriteList {
 
     //MODIFIES: this
     //EFFECTS: allows user to add, remove or play games from list
-    public void runFavList() {
-        Scanner input = new Scanner(System.in);
-        String stubInput;
+    //         keeps running until told to stop
+    public void runFavList() throws IOException {
+        String stubInput = "";
 
-        printList();
-        System.out.println("What would you like to do?");
-        System.out.println("1 - play a game from your list");
-        System.out.println("2 - add a game to your list");
-        System.out.println("3 - remove a game from your list");
-        System.out.println("4 - return to main menu");
-        stubInput = input.next();
+        this.favList = new FavouriteListReader().read(new File(FAV_LIST)).favList;
 
-        if (! (stubInput.equals("1") || stubInput.equals("2") || stubInput.equals("3") || stubInput.equals("4"))) {
-            System.out.println("invalid input...");
-            runFavList();
+        while (!stubInput.equals("4")) {
+            printList();
+            System.out.println("What would you like to do?");
+            System.out.println("1 - play a game from your list");
+            System.out.println("2 - add a game to your list");
+            System.out.println("3 - remove a game from your list");
+            System.out.println("4 - return to main menu");
+            stubInput = input.next();
+
+            if (!(stubInput.equals("1") || stubInput.equals("2") || stubInput.equals("3") || stubInput.equals("4"))) {
+                System.out.println("invalid input...");
+                runFavList();
+            }
+
+            if (stubInput.equals("1")) {
+                runFav();
+            } else if (stubInput.equals("2")) {
+                addFav();
+            } else if (stubInput.equals("3")) {
+                removeFav();
+            }
         }
 
-        if (stubInput.equals("1")) {
-            runFav();
-        } else if (stubInput.equals("2")) {
-            addFav();
-        } else if (stubInput.equals("3")) {
-            removeFav();
-        }
+        saveFavList(FAV_LIST);
     }
 
     //MODIFIES: this
     //EFFECTS: runs the game chosen by the user
     public void runFav() {
-        Scanner input = new Scanner(System.in);
         int num;
 
         printList();
@@ -111,8 +123,8 @@ public class FavouriteList {
     //EFFECTS: prints the list in the console
     public void printList() {
         System.out.println("List of Favourite Games:");
+        System.out.println("-----------------------------------------------------");
         for (int i = 0; i < favList.size(); i++) {
-            System.out.println("-----------------------------------------------------");
             System.out.println((i + 1) + " - " + favList.get(i).getDescription());
         }
         System.out.println();
@@ -127,5 +139,31 @@ public class FavouriteList {
             }
         }
         return false;
+    }
+
+    @Override
+    public void save(PrintWriter printWriter) {
+        for (Game g: favList) {
+            printWriter.println(g.getDescription());
+        }
+    }
+
+    // EFFECTS: saves state of the favourite list in FAV_LIST
+    public void saveFavList(String s) {
+        try {
+            Writer writer = new Writer(new File(s));
+            writer.write(this);
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save accounts to " + FAV_LIST);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: straight forward add inputted game into the list
+    public void simpleAdd(Game g) {
+        favList.add(g);
     }
 }

@@ -3,6 +3,7 @@ package model.sudoku;
 import java.util.ArrayList;
 import java.util.Random;
 
+// represents the bank of all seeds
 public class SeedBank {
     static ArrayList<Seed> bank;
 
@@ -11,12 +12,16 @@ public class SeedBank {
         setup();
     }
 
+    //EFFECTS: return a random seed from the bank
     public Seed getSeed() {
         Random rand = new Random();
 
         return bank.get(rand.nextInt(bank.size()));
     }
 
+
+    //MODIFIES: this
+    //EFFECTS: adds the determined seeds to the bank
     public void setup() {
         bank.add(new Seed("523986147164735289897241563439512678782694351651873924346128795278359416915467832",
                 "..3.861....47...8....2...6.4.........82....5......392.346..8..5.7...9.....5.6...2"));

@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+// represents a sudoku board
 public class Seed {
     String actualSeed;
     String visibleSeed;
     Random rand = new Random();
 
+    //MODIFIES: this
+    //EFFECTS: assigns a value to the seed
     public Seed(String actualSeed, String visibleSeed) {
         this.actualSeed = actualSeed;
         this.visibleSeed = visibleSeed;
     }
 
+    //MODIFIES: this
+    //EFFECTS: gets a seed from the bank and randomizes it
     public Seed() {
         SeedBank bank = new SeedBank();
         randomizeSeed(bank.getSeed());
@@ -27,7 +32,9 @@ public class Seed {
         return visibleSeed;
     }
 
-    private void randomizeSeed(Seed s) {
+    //MODIFIES: this
+    //EFFECTS: randomize the seed
+    public void randomizeSeed(Seed s) {
         ArrayList<Integer> num = new ArrayList<>();
 
         for (int i = 1; i < 10; i++) {
@@ -57,6 +64,7 @@ public class Seed {
         this.actualSeed = actualS;
     }
 
+    //EFFECTS: returns the seed with all its numbers randomized
     public ArrayList<Character> randomizeNumber(ArrayList<Integer> num, String s) {
         ArrayList<Character> seedString = new ArrayList<>();
 
@@ -73,6 +81,7 @@ public class Seed {
         return seedString;
     }
 
+    //EFFECTS: returns a rotated seed
     public ArrayList<Character> randomizeRotate(int rotation, ArrayList<Character> seedChar) {
 
         if (rotation == 1) {
@@ -86,6 +95,7 @@ public class Seed {
         }
     }
 
+    //EFFECTS: returns a board rotated by 90 degrees
     public ArrayList<Character> rotate90(ArrayList<Character> seedChar) {
         Character helperChar;
         Character helperChar2;
@@ -93,34 +103,43 @@ public class Seed {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                helperChar = seedChar.get((9 * j) + max - i);
-                seedChar.set((9 * j) + max - i, seedChar.get((9 * i) + j));
-                helperChar2 = seedChar.get((9 * (max - i)) + max - j);
-                seedChar.set((9 * (max - i)) + max - j, helperChar);
-                helperChar = seedChar.get((9 * (max - j)) + i);
-                seedChar.set((9 * (max - j)) + i, helperChar2);
-                seedChar.set((9 * i) + j, helperChar);
+                int pos0 = (9 * i) + j;
+                int pos1 = (9 * j) + max - i;
+                int pos2 = (9 * (max - i)) + max - j;
+                int pos3 = (9 * (max - j)) + i;
+
+                helperChar = seedChar.get(pos1);
+                seedChar.set(pos1, seedChar.get(pos0));
+                helperChar2 = seedChar.get(pos2);
+                seedChar.set(pos2, helperChar);
+                helperChar = seedChar.get(pos3);
+                seedChar.set(pos3, helperChar2);
+                seedChar.set(pos0, helperChar);
             }
         }
 
         return seedChar;
     }
 
+    //EFFECTS: returns a board rotated by 180 degrees
     public ArrayList<Character> rotate180(ArrayList<Character> seedChar) {
         Character helperChar;
         int max = 8;
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                helperChar = seedChar.get((9 * (max - i)) + max - j);
-                seedChar.set((9 * (max - i)) + max - j,seedChar.get((9 * i) + j));
-                seedChar.set((9 * i) + j, helperChar);
+                int pos0 = (9 * i) + j;
+                int pos1 = (9 * (max - i)) + max - j;
+                helperChar = seedChar.get(pos1);
+                seedChar.set(pos1,seedChar.get(pos0));
+                seedChar.set(pos0, helperChar);
             }
         }
 
         return seedChar;
     }
 
+    //EFFECTS: returns the board rotated by 270 degrees
     public ArrayList<Character> rotate270(ArrayList<Character> seedChar) {
         Character helperChar;
         Character helperChar2;
@@ -128,21 +147,27 @@ public class Seed {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                helperChar = seedChar.get((9 * (max - j)) + i);
-                seedChar.set((9 * (max - j)) + i, seedChar.get((9 * i) + j));
-                helperChar2 = seedChar.get((9 * (max - i)) + max - j);
-                seedChar.set((9 * (max - i)) + max - j, helperChar);
-                helperChar = seedChar.get((9 * j) + max - i);
-                seedChar.set((9 * j) + max - i, helperChar2);
-                seedChar.set((9 * i) + j, helperChar);
+                int pos0 = (9 * i) + j;
+                int pos1 = (9 * (max - j)) + i;
+                int pos2 = (9 * (max - i)) + max - j;
+                int pos3 = (9 * j) + max - i;
+
+                helperChar = seedChar.get(pos1);
+                seedChar.set(pos1, seedChar.get(pos0));
+                helperChar2 = seedChar.get(pos2);
+                seedChar.set(pos2, helperChar);
+                helperChar = seedChar.get(pos3);
+                seedChar.set(pos3, helperChar2);
+                seedChar.set(pos0, helperChar);
             }
         }
 
         return seedChar;
     }
 
+    //EFFECTS: returns a board flipped around the horizontal axis
     public ArrayList<Character> randomizeFlipV(boolean flipV, ArrayList<Character> seedChar) {
-        if (flipV == false) {
+        if (!flipV) {
             return seedChar;
         }
 
@@ -160,10 +185,10 @@ public class Seed {
         return seedChar;
     }
 
+    //EFFECTS: returns the board in form of seed rotated flipped around the vertical axis
     public String randomizeFlipH(boolean flipH, ArrayList<Character> seedChar) {
-        if (flipH == false) {
-            String seedString = seedChar.stream().map(String::valueOf).collect(Collectors.joining());
-            return seedString;
+        if (!flipH) {
+            return seedChar.stream().map(String::valueOf).collect(Collectors.joining());
         }
 
         String seedString = seedChar.stream().map(String::valueOf).collect(Collectors.joining());
@@ -180,10 +205,4 @@ public class Seed {
 
         return seedString;
     }
-
-//    private void setupSeeds() {
-//        String seed1 = "..3.861....47...8....2...6.4.........82....5......392.346..8..5.7...9.....5.6...2"
-//                + "523986147164735289897241563439512678782694351651873924346128795278359416915467832";
-//        seeds.add(seed1);
-//    }
 }

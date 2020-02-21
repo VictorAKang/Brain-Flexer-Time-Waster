@@ -67,6 +67,7 @@ public class Cell {
         this.isFlagged = !this.isFlagged;
     }
 
+    //EFFECTS: returns true if cell is flagged, false if not
     public boolean isFlagged() {
         return isFlagged;
     }
