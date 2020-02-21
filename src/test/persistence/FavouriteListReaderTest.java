@@ -26,9 +26,9 @@ public class FavouriteListReaderTest {
     public void favouriteListReaderTest1() {
         try {
             FavouriteList favList = new FavouriteListReader().read(new File("./data/testFavouriteList1.txt"));
-            assertTrue(favList.containGame("minesweeper"));
-            assertFalse(favList.containGame("sudoku"));
-            assertEquals("minesweeper", favList.favList.get(0).getDescription());
+            assertTrue(favList.containGame("sudoku"));
+            assertFalse(favList.containGame("minesweeper"));
+            assertEquals("sudoku", favList.favList.get(0).getDescription());
         } catch (IOException e) {
             fail("unexpected IOException");
         }
