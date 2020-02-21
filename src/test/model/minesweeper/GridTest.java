@@ -55,7 +55,7 @@ public class GridTest {
     }
 
     @Test
-    public void opeCell() {
+    public void opeCellTest() {
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 16; j++) {
                 if (grid.grid[i][j].getIsMine()) {
@@ -68,11 +68,17 @@ public class GridTest {
     }
 
     @Test
-    public void flagCell() {
+    public void flagCellTest() {
         grid.flagCell(0,1);
         assertTrue(grid.grid[1][0].isFlagged());
         grid.flagCell(0,1);
         assertFalse(grid.grid[1][0].isFlagged());
+    }
+
+    @Test
+    public void openFlaggedCellTest() {
+        grid.flagCell(0,0);
+        assertTrue(grid.openCell(0,0));
     }
 
 
