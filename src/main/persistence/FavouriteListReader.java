@@ -27,7 +27,10 @@ public class FavouriteListReader implements Reader {
         for (String s: storedGames) {
             if (s.equals("minesweeper")) {
                 favList.simpleAdd(new Minesweeper(1));
-            } else if (s.equals("sudoku")) {
+//            } else if (s.equals("sudoku")) {
+//                favList.simpleAdd(new Sudoku(1));
+//            }
+            } else {
                 favList.simpleAdd(new Sudoku(1));
             }
         }
