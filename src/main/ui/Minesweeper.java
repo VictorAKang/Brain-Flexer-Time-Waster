@@ -1,9 +1,6 @@
 package ui;
 
-import com.oracle.javafx.jmx.json.JSONWriter;
 import model.minesweeper.Grid;
-import netscape.javascript.JSObject;
-import persistence.Saveable;
 
 import java.util.Scanner;
 
