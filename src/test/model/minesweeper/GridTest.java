@@ -91,7 +91,7 @@ public class GridTest {
             }
         }
 
-        return answer;
+        return answer; 
     }
 
     public int countNotMines(ArrayList<Cell> array) {
