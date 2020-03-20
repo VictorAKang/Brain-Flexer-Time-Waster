@@ -1,7 +1,7 @@
-package ui;
+package ui.menu;
 
 import model.sudoku.Grid;
-import persistence.Saveable;
+import ui.menu.Game;
 
 import java.util.Scanner;
 

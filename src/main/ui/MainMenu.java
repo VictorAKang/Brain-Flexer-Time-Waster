@@ -1,5 +1,9 @@
 package ui;
 
+import ui.menu.FavouriteList;
+import ui.menu.Minesweeper;
+import ui.menu.Sudoku;
+
 import java.io.IOException;
 import java.util.Scanner;
 

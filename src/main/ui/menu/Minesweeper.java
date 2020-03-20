@@ -1,4 +1,4 @@
-package ui;
+package ui.menu;
 
 import model.minesweeper.Grid;
 
@@ -83,7 +83,7 @@ public class Minesweeper implements Game {
 //
 //        coordinateY = input.nextInt() - 1;
 
-        if (coordinateY > Grid.HEIGHT - 1 || coordinateY < 0) {
+        if (coordinateY > Grid.LONG_SIDE - 1 || coordinateY < 0) {
             System.out.println(coordinateY);
             System.out.println("invalid input...");
             return askCoordinateY();

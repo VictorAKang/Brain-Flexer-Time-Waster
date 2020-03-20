@@ -1,5 +1,7 @@
 package model.minesweeper;
 
+import java.util.jar.JarOutputStream;
+
 // this class represents a single cell of the grid
 // an object of this class stores whether the cell has been opened, if it is a mine, if it is flagged,
 // and how many mines it has adjacent to it (if the cell at question is not a mine)
@@ -39,6 +41,10 @@ public class Cell {
     //EFFECTS: returns true if the cell is a mine,
     //         else, return false and change cell status to open and remove flag if necessary
     public boolean openCell() {
+        if (isFlagged) {
+            return false;
+        }
+
         if (isMine) {
             System.out.println("Game Over");
             return true;
@@ -82,4 +88,8 @@ public class Cell {
     public void setAdjacentBombs(int adjacent) {
         this.adjacentBombs = adjacent;
     }
+
+//    public void setClosed() {
+//        this.isOpen = false;
+//    }
 }

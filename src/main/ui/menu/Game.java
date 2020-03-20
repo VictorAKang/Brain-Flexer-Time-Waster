@@ -1,4 +1,4 @@
-package ui;
+package ui.menu;
 
 // represents a Game
 public interface Game {

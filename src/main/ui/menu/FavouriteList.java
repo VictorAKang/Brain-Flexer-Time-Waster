@@ -1,4 +1,4 @@
-package ui;
+package ui.menu;
 
 import persistence.FavouriteListReader;
 import persistence.Saveable;
@@ -17,6 +17,14 @@ public class FavouriteList implements Saveable {
     public FavouriteList() {
         favList = new LinkedList<>();
     }
+
+//    public FavouriteList(int i) {
+//        try {
+//            this = new FavouriteListReader().read(new File(FAV_LIST));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     //MODIFIES: this
     //EFFECTS: allows user to add, remove or play games from list
@@ -165,5 +173,13 @@ public class FavouriteList implements Saveable {
     //EFFECTS: straight forward add inputted game into the list
     public void simpleAdd(Game g) {
         favList.add(g);
+    }
+
+    public void removeFav(String game) {
+        for (int i = 0; i < favList.size(); i++) {
+            if (favList.get(i).getDescription().equals(game)) {
+                favList.remove(i);
+            }
+        }
     }
 }

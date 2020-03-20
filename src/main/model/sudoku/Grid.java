@@ -15,7 +15,7 @@ public class Grid {
     //MODIFIES: this
     //EFFECTS: use seed to generate the board
     public void seedToGrid() {
-        Seed seed = new Seed();
+        //seed = new Seed();
         Cell accessPoint;
 
         for (int i = 0; i < 9; i++) {
@@ -94,5 +94,14 @@ public class Grid {
             }
         }
         return true;
+    }
+
+    public void resetGame() {
+        grid = new Cell[9][9];
+        seedToGrid();
+    }
+
+    public char getCellVisible(int coordinateI, int coordinateJ) {
+        return seed.getCellVisibleNumber(coordinateI,coordinateJ);
     }
 }

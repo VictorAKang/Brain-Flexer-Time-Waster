@@ -1,7 +1,7 @@
 package persistence;
 
 import org.junit.jupiter.api.Test;
-import ui.FavouriteList;
+import ui.menu.FavouriteList;
 
 import java.io.File;
 import java.io.IOException;

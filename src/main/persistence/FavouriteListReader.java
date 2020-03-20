@@ -1,8 +1,8 @@
 package persistence;
 
-import ui.FavouriteList;
-import ui.Minesweeper;
-import ui.Sudoku;
+import ui.menu.FavouriteList;
+import ui.menu.Minesweeper;
+import ui.menu.Sudoku;
 
 import java.io.File;
 import java.io.IOException;

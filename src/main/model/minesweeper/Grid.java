@@ -1,20 +1,22 @@
 package model.minesweeper;
 
+import exceptions.OutOfRangeException;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 // represents the whole grid where the game will be played
 // stores references to all cells that are part of the game
 public class Grid {
-    static final int WIDTH = 16;
-    public static final int HEIGHT = 30;
+    public static final int LONG_SIDE = 30; //CoordinateI
+    public static final int SHORT_SIDE = 16; //CoordinateJ
     public static final int NUM_MINES = 99;
-    public static final int TOTAL_NUM_CELLS = WIDTH * HEIGHT;
+    public static final int TOTAL_NUM_CELLS = SHORT_SIDE * LONG_SIDE;
 
     public Cell[][] grid; //represents the field in the current state of the game
 
     public Grid() {
-        grid = new Cell[HEIGHT][WIDTH];
+        grid = new Cell[LONG_SIDE][SHORT_SIDE];
         genGrid();
     }
 
@@ -41,9 +43,9 @@ public class Grid {
         ArrayList<Cell> randomizedField;
         randomizedField = shuffle(toBeRandomized);
 
-        for (int i = 0; i < HEIGHT; i++) {
-            for (int j = 0; j < WIDTH; j++) {
-                grid[i][j] = randomizedField.get(j + (WIDTH * i));
+        for (int i = 0; i < LONG_SIDE; i++) {
+            for (int j = 0; j < SHORT_SIDE; j++) {
+                grid[i][j] = randomizedField.get(j + (SHORT_SIDE * i));
             }
         }
 
@@ -74,8 +76,8 @@ public class Grid {
     //MODIFIES: this
     //EFFECTS: set the value of adjacentMines of all nonMineCells to the correct value
     public void setAllNonMineCells() {
-        for (int i = 0; i < HEIGHT; i++) {
-            for (int j = 0; j < WIDTH; j++) {
+        for (int i = 0; i < LONG_SIDE; i++) {
+            for (int j = 0; j < SHORT_SIDE; j++) {
                 if (!grid[i][j].getIsMine()) {
                     grid[i][j].setAdjacentBombs(findAdjacentMines(i, j));
                 }
@@ -93,13 +95,13 @@ public class Grid {
 
         if (i == 0) {
             minI = i;
-        } else if (i == HEIGHT - 1) {
+        } else if (i == LONG_SIDE - 1) {
             maxI = i;
         }
 
         if (j == 0) {
             minJ = j;
-        } else if (j == WIDTH - 1) {
+        } else if (j == SHORT_SIDE - 1) {
             maxJ = j;
         }
 
@@ -124,16 +126,16 @@ public class Grid {
         for (int i = 0; i < 9; i++) {
             line = "";
             line += (i + 1) + "-  ";
-            for (int j = 0; j < WIDTH; j++) {
+            for (int j = 0; j < SHORT_SIDE; j++) {
                 line += grid[i][j].draw() + " ";
             }
             System.out.println(line + "\n");
         }
 
-        for (int i = 9; i < HEIGHT; i++) {
+        for (int i = 9; i < LONG_SIDE; i++) {
             line = "";
             line += (i + 1) + "- ";
-            for (int j = 0; j < WIDTH; j++) {
+            for (int j = 0; j < SHORT_SIDE; j++) {
                 line += grid[i][j].draw() + " ";
             }
             System.out.println(line + "\n");
@@ -144,16 +146,16 @@ public class Grid {
     //EFFECTS: open the referenced cell and executes openAdjacent if referenced cell is not a mine and has no adjacent
     //         ones
     //         returns true if cell is a mine and false if not
-    public boolean openCell(int coordinateX, int coordinateY) {
-        if (grid[coordinateY][coordinateX].isFlagged()) {
+    public boolean openCell(int coordinateI, int coordinateJ) {
+        if (grid[coordinateJ][coordinateI].isFlagged()) {
             System.out.println("cell is flagged");
             return true;
         }
 
         boolean returnValue;
-        returnValue = grid[coordinateY][coordinateX].openCell();
+        returnValue = grid[coordinateJ][coordinateI].openCell();
 
-        openAdjacent(coordinateX, coordinateY); //hi TA, i <3 u. pls give me a 100%.
+        openAdjacent(coordinateI, coordinateJ); //hi TA, i <3 u. pls give me a 100%.
 
         return returnValue;
     }
@@ -161,38 +163,38 @@ public class Grid {
     //MODIFIES: this
     //EFFECTS: open all adjacent cells if the inputted one has 0 adjacent bombs, else do nothing
     //         repeats process for all adjacent bombs
-    public void openAdjacent(int coordinateX, int coordinateY) {
+    public void openAdjacent(int coordinateI, int coordinateJ) {
 
-        if (grid[coordinateY][coordinateX].getAdjacentBombs() == 0) {
-            int minI = coordinateY - 1;
-            int maxI = coordinateY + 1;
-            int minJ = coordinateX - 1;
-            int maxJ = coordinateX + 1;
+        if (grid[coordinateJ][coordinateI].getAdjacentBombs() == 0) {
+            int minI = coordinateJ - 1;
+            int maxI = coordinateJ + 1;
+            int minJ = coordinateI - 1;
+            int maxJ = coordinateI + 1;
 
-            if (coordinateY == 0) {
-                minI = coordinateY;
-            } else if (coordinateY == HEIGHT - 1) {
-                maxI = coordinateY;
+            if (coordinateJ == 0) {
+                minI = coordinateJ;
+            } else if (coordinateJ == LONG_SIDE - 1) {
+                maxI = coordinateJ;
             }
 
-            if (coordinateX == 0) {
-                minJ = coordinateX;
-            } else if (coordinateX == WIDTH - 1) {
-                maxJ = coordinateX;
+            if (coordinateI == 0) {
+                minJ = coordinateI;
+            } else if (coordinateI == SHORT_SIDE - 1) {
+                maxJ = coordinateI;
             }
 
-            openAdjacentHelper(coordinateX, coordinateY, minI,maxI,minJ,maxJ);
+            openAdjacentHelper(coordinateI, coordinateJ, minI,maxI,minJ,maxJ);
         }
     }
 
     //MODIFIES: this
     //EFFECTS: opens all adjacent cells and calls this function for all adjacent ones that are 0
-    public void openAdjacentHelper(int coordinateX, int coordinateY, int minI, int maxI, int minJ, int maxJ) {
+    public void openAdjacentHelper(int coordinateI, int coordinateJ, int minI, int maxI, int minJ, int maxJ) {
         boolean stubVar;
 
         for (int i = minI; i <= maxI; i++) {
             for (int j = minJ; j <= maxJ; j++) {
-                if ((!(i == coordinateY && j == coordinateX)) && !grid[i][j].getIsOpen()) {
+                if ((!(i == coordinateJ && j == coordinateI)) && !grid[i][j].getIsOpen()) {
                     stubVar = grid[i][j].openCell();
                     openAdjacent(j, i);
                 }
@@ -202,8 +204,49 @@ public class Grid {
 
     //MODIFIES: referenced cell
     //EFFECTS: change the state of isFlagged of the referenced cell
-    public void flagCell(int coordinateX, int coordinateY) {
-        grid[coordinateY][coordinateX].changeMarking();
+    public void flagCell(int coordinateI, int coordinateJ) {
+        grid[coordinateI][coordinateJ].changeMarking();
     }
 
+
+    //EFFECTS: returns true if cell is flagged
+    public boolean isFlagged(int coordinateI, int coordinateJ) throws OutOfRangeException {
+        if (coordinateI > LONG_SIDE || coordinateJ > SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
+            throw new OutOfRangeException();
+        }
+
+        return grid[coordinateI][coordinateJ].isFlagged();
+    }
+
+    //EFFECTS: return true if cell is a mine
+    public boolean isMine(int coordinateI, int coordinateJ) throws OutOfRangeException {
+        if (coordinateI > LONG_SIDE || coordinateJ > SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
+            throw new OutOfRangeException();
+        }
+
+        return grid[coordinateI][coordinateJ].getIsMine();
+    }
+
+    //EFFECTS: returns the number that is in the cell being passed on
+    public int getNumber(int coordinateI, int coordinateJ) {
+        return grid[coordinateI][coordinateJ].getAdjacentBombs();
+    }
+
+    //EFFECTS: sets the cell to be open
+    public void setOpen(int coordinateI, int coordinateJ) {
+        grid[coordinateI][coordinateJ].openCell();
+    }
+
+    //EFFECTS: returns true if cell is open
+    public boolean getIsOpen(int coordinateI, int coordinateJ) {
+        return grid[coordinateI][coordinateJ].getIsOpen();
+    }
+
+//    public void setAllClosed() {
+//        for (int i = 0; i < LONG_SIDE; i++) {
+//            for (int j = 0; j < SHORT_SIDE; j++) {
+//                grid[i][j].setClosed();
+//            }
+//        }
+//    }
 }

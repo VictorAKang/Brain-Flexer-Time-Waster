@@ -2,13 +2,11 @@ package persistence;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.FavouriteList;
-import ui.Minesweeper;
+import ui.menu.FavouriteList;
+import ui.menu.Minesweeper;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -205,4 +205,8 @@ public class Seed {
 
         return seedString;
     }
+
+    protected char getCellVisibleNumber(int coordinateI, int coordinateJ) {
+        return visibleSeed.charAt(coordinateI * 9 + coordinateJ);
+    }
 }
