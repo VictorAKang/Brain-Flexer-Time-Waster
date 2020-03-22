@@ -19,7 +19,7 @@ public class MainMenuUI extends Application {
     protected static Scene mainMenu;
     protected static MinesweeperUI minesweeper = new MinesweeperUI();
     protected static SudokuUI sudoku = new SudokuUI();
-    protected static Scene favourite;
+    protected static FavouriteListUI favourite = new FavouriteListUI();
 
     public static void main(String[] args) {
         launch(args);
@@ -94,7 +94,8 @@ public class MainMenuUI extends Application {
         Button favouriteButton = new Button();
         favouriteButton.setText("Open favourite list");
         favouriteButton.setMaxWidth(130);
-        favouriteButton.setOnAction(e -> FavouriteListUI.display(primaryStage));
+        favouriteButton.setOnAction(e ->
+                primaryStage.setScene(favourite.display(primaryStage)));
 
         return favouriteButton;
     }

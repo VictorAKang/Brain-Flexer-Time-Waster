@@ -50,7 +50,6 @@ public class Cell {
             return true;
         }
         this.isOpen = true;
-        this.isFlagged = false;
         return false;
     }
 

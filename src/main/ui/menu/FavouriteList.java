@@ -175,11 +175,21 @@ public class FavouriteList implements Saveable {
         favList.add(g);
     }
 
-    public void removeFav(String game) {
+    public void removeFav(String description) {
         for (int i = 0; i < favList.size(); i++) {
-            if (favList.get(i).getDescription().equals(game)) {
+            if (favList.get(i).getDescription().equals(description)) {
                 favList.remove(i);
+                return;
             }
         }
+    }
+
+    public boolean hasGame(String description) {
+        for (Game g: favList) {
+            if (g.getDescription().equals(description)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
