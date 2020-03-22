@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SeedTest {
     Seed s;
@@ -46,5 +47,11 @@ public class SeedTest {
 
             assertEquals(numDigits, numDigitsPostRandomizer);
         }
+    }
+
+    @Test
+    public void getCellVisibleNumberTest() {
+        char c = s.getCellVisibleNumber(0,0);
+        assertEquals(s.visibleSeed.charAt(0),c);
     }
 }

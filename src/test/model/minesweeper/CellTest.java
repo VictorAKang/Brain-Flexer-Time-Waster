@@ -42,7 +42,7 @@ public class CellTest {
         assertFalse(emptyCell.openCell());
         assertTrue(mine.openCell());
         assertFalse(flaggedCell.openCell());
-        assertTrue(flaggedMine.openCell());
+        assertFalse(flaggedMine.openCell());
     }
 
     @Test

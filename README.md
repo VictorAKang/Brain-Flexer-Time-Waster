@@ -27,7 +27,7 @@ As a user, I would like to be able to see my favourite games list and add new ga
 As a user, I would like to be able to have my favourite games list saved.
 As a user, I would like to see my favourite games list as I left off when reopening the app.
 
-##Instructions for Grader
+## Instructions for Grader
 
 From the Main Menu you can choose if you want to play **Minesweeper** or **Sudoku**, look into your **Favourite Games 
 List** or simply *Quit* the app. From there, you can follow the instructions in the corresponding section.

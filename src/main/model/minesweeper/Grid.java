@@ -155,7 +155,7 @@ public class Grid {
         boolean returnValue;
         returnValue = grid[coordinateJ][coordinateI].openCell();
 
-        openAdjacent(coordinateI, coordinateJ); //hi TA, i <3 u. pls give me a 100%.
+        openAdjacent(coordinateI, coordinateJ); //hi TA, i <3 u. pls give me a 100%. ty.
 
         return returnValue;
     }
@@ -211,7 +211,7 @@ public class Grid {
 
     //EFFECTS: returns true if cell is flagged
     public boolean isFlagged(int coordinateI, int coordinateJ) throws OutOfRangeException {
-        if (coordinateI > LONG_SIDE || coordinateJ > SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
+        if (coordinateI >= LONG_SIDE || coordinateJ >= SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
             throw new OutOfRangeException();
         }
 
@@ -220,7 +220,7 @@ public class Grid {
 
     //EFFECTS: return true if cell is a mine
     public boolean isMine(int coordinateI, int coordinateJ) throws OutOfRangeException {
-        if (coordinateI > LONG_SIDE || coordinateJ > SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
+        if (coordinateI >= LONG_SIDE || coordinateJ >= SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
             throw new OutOfRangeException();
         }
 

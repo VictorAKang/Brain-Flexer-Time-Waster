@@ -39,4 +39,25 @@ public class GridTest {
 
         assertTrue(grid.gameComplete());
     }
+
+    @Test
+    public void resetGameTest() {
+        char c00 = grid.getCellVisible(0,0);
+        char c01 = grid.getCellVisible(0,1);
+        char c10 = grid.getCellVisible(1,0);
+        char c11  = grid.getCellVisible(1,1);
+
+        grid.resetGame();
+
+        assertFalse(c00 == grid.getCellVisible(0,0)
+                && c01 == grid.getCellVisible(0,1)
+                && c10 == grid.getCellVisible(1,0)
+                && c11 == grid.getCellVisible(1,1));
+
+    }
+
+    @Test
+    public void getCellVisibleTest() {
+        assertNotNull(grid.getCellVisible(0,0));
+    }
 }
