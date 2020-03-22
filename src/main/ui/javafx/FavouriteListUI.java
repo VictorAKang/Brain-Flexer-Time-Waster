@@ -223,7 +223,7 @@ public class FavouriteListUI {
         sudokuStarStatus.setFitHeight(GAME_LIST_HEIGHT);
         sudokuStarStatus.setFitWidth(GAME_LIST_HEIGHT);
 //
-//        minesweeperStarStatus = new ImageView(starImage);
+//        minesweeperStarStatus = new ImageView(starImage); 
 //        minesweeperStarStatus.setFitWidth(GAME_LIST_HEIGHT);
 //        minesweeperStarStatus.setFitHeight(GAME_LIST_HEIGHT);
 //        sudokuStarStatus = new ImageView(starImage);
