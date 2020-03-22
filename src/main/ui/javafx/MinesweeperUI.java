@@ -1,6 +1,5 @@
 package ui.javafx;
 
-import exceptions.ButtonNotFoundException;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -295,7 +294,7 @@ public class MinesweeperUI {
         return referenceView;
     }
 
-    private int findIButton(Button b) throws ButtonNotFoundException {
+    private int findIButton(Button b) {
         for (int i = 0; i < Grid.LONG_SIDE; i++) {
             for (int j = 0; j < Grid.SHORT_SIDE; j++) {
                 if (buttonField[i][j].equals(b)) {
@@ -304,10 +303,10 @@ public class MinesweeperUI {
             }
         }
 
-        throw new ButtonNotFoundException();
+        return 0;
     }
 
-    private int findJButton(Button b) throws ButtonNotFoundException {
+    private int findJButton(Button b) {
         for (int i = 0; i < Grid.LONG_SIDE; i++) {
             for (int j = 0; j < Grid.SHORT_SIDE; j++) {
                 if (buttonField[i][j].equals(b)) {
@@ -316,7 +315,7 @@ public class MinesweeperUI {
             }
         }
 
-        throw new ButtonNotFoundException();
+        return 0;
     }
 }
 
