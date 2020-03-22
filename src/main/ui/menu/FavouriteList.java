@@ -128,6 +128,15 @@ public class FavouriteList implements Saveable {
         favList.remove(number - 1);
     }
 
+    public void removeFav(String description) {
+        for (int i = 0; i < favList.size(); i++) {
+            if (favList.get(i).getDescription().equals(description)) {
+                favList.remove(i);
+                return;
+            }
+        }
+    }
+
     //EFFECTS: prints the list in the console
     public void printList() {
         System.out.println("List of Favourite Games:");
@@ -173,15 +182,6 @@ public class FavouriteList implements Saveable {
     //EFFECTS: straight forward add inputted game into the list
     public void simpleAdd(Game g) {
         favList.add(g);
-    }
-
-    public void removeFav(String description) {
-        for (int i = 0; i < favList.size(); i++) {
-            if (favList.get(i).getDescription().equals(description)) {
-                favList.remove(i);
-                return;
-            }
-        }
     }
 
     public boolean hasGame(String description) {
