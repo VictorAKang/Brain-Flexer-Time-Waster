@@ -13,7 +13,7 @@ import model.minesweeper.Grid;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-
+// the ui part of the minesweeper game
 public class MinesweeperUI {
     private static FileInputStream closedTileInput;
     private static FileInputStream flagTileInput;
@@ -58,6 +58,8 @@ public class MinesweeperUI {
         setupImages();
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up all file input stream
     private void setupImageInputs() {
         try {
             closedTileInput = new FileInputStream("./data/minesweeperImages/closed_tile.jpg");
@@ -77,6 +79,8 @@ public class MinesweeperUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up all images
     private void setupImages() {
         closedTile = new Image(closedTileInput);
         flagTile = new Image(flagTileInput);
@@ -92,6 +96,8 @@ public class MinesweeperUI {
         mineTile = new Image(mineTileInput);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the scene and returns it
     protected Scene display() {
         //minesweeperGrid.setAllClosed();
 
@@ -107,6 +113,8 @@ public class MinesweeperUI {
         return minesweeperScene;
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the menu buttons on the top
     private void setMenuField() {
 
         HBox buttonLayout = new HBox(5);
@@ -137,6 +145,8 @@ public class MinesweeperUI {
         layout.setTop(buttonLayout);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the button field that will make up the minesweeper game
     private void setButtonField() {
 
         FlowPane fieldLayout = new FlowPane();
@@ -156,6 +166,7 @@ public class MinesweeperUI {
         layout.setCenter(fieldLayout);
     }
 
+    //EFFECTS: returns a field button with the correct behaviour
     private Button setButton() {
         Button referenceButton = new Button();
 
@@ -175,6 +186,10 @@ public class MinesweeperUI {
         return referenceButton;
     }
 
+    //MODIFIES: this
+    //EFFECTS: takes a button and opens it if its not a bomb or flagged
+    //         if its a bomb disable all buttons
+    //         if its a flag does nothing
     private void openButton(Button b) {
         int coordinateI = findIButton(b);
         int coordinateJ = findJButton(b);
@@ -188,6 +203,8 @@ public class MinesweeperUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: goes through all the buttons and changes the images of those which are open
     private void refreshDisplay() {
         for (int i = 0; i < Grid.LONG_SIDE; i++) {
             for (int j = 0; j < Grid.SHORT_SIDE; j++) {
@@ -198,6 +215,8 @@ public class MinesweeperUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: takes the coordinates of a button and changes its image to the corresponding one
     private void setButtonNumberImage(int coordinateI, int coordinateJ) {
         Button b;
         b = buttonField[coordinateI][coordinateJ];
@@ -208,6 +227,8 @@ public class MinesweeperUI {
         b.setGraphic(referenceView);
     }
 
+    //MODIFIES: this
+    //EFFECTS: takes a button and alters its flag state and image
     private void flagButton(Button b) {
         int coordinateI = findIButton(b);
         int coordinateJ = findJButton(b);
@@ -223,6 +244,8 @@ public class MinesweeperUI {
         minesweeperGrid.flagCell(coordinateI,coordinateJ);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the given button with the closed tile image
     private void closedTileImageButton(Button b) {
         ImageView referenceView;
         referenceView = new ImageView(closedTile);
@@ -233,6 +256,8 @@ public class MinesweeperUI {
         b.setGraphic(referenceView);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the given button image to the flag tile image
     private void flagImageButton(Button b) {
         ImageView referenceView;
         referenceView = new ImageView(flagTile);
@@ -243,6 +268,8 @@ public class MinesweeperUI {
         b.setGraphic(referenceView);
     }
 
+    //MODIFIES: this
+    //EFFECTS:
     private void disableAllButton() {
         for (int i = 0; i < Grid.LONG_SIDE; i++) {
             for (int j = 0; j < Grid.SHORT_SIDE; j++) {
@@ -255,6 +282,8 @@ public class MinesweeperUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up given button with the image of a bomb
     private void setImageButtonMine(Button b) {
         ImageView referenceView;
         referenceView = new ImageView(mineTile);
@@ -265,6 +294,7 @@ public class MinesweeperUI {
         b.setGraphic(referenceView);
     }
 
+    //EFFECTS: returns the corresponding ImageView to the number given
     private ImageView numberToImageView(int number) {
         ImageView referenceView;
 
@@ -294,6 +324,7 @@ public class MinesweeperUI {
         return referenceView;
     }
 
+    //EFFECTS: returns the i coordinate of the given button
     private int findIButton(Button b) {
         for (int i = 0; i < Grid.LONG_SIDE; i++) {
             for (int j = 0; j < Grid.SHORT_SIDE; j++) {
@@ -306,6 +337,7 @@ public class MinesweeperUI {
         return 0;
     }
 
+    //EFFECTS: returns the j coordinate of the given button
     private int findJButton(Button b) {
         for (int i = 0; i < Grid.LONG_SIDE; i++) {
             for (int j = 0; j < Grid.SHORT_SIDE; j++) {

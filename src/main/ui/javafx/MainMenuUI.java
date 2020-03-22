@@ -12,7 +12,7 @@ import javafx.scene.text.FontPosture;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-
+// the main class that runs the main menu of the application
 public class MainMenuUI extends Application {
     protected static Stage primaryStage;
 
@@ -47,17 +47,22 @@ public class MainMenuUI extends Application {
         primaryStage.show();
     }
 
+    //MODIFIES: this
+    //EFFECTS: centers the screen and makes the main menu the screen
     protected static void goBackMainMenu() {
         primaryStage.setScene(mainMenu);
         centerScreen();
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the screen in the middle of the screen
     protected static void centerScreen() {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         primaryStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth()) / 2);
         primaryStage.setY((primScreenBounds.getHeight() - primaryStage.getHeight()) / 2);
     }
 
+    //EFFECTS: sets a label with the correct title and returns it
     private Label setTitleLabel() {
         Label mainTittle = new Label();
         mainTittle.setText("Welcome to the puzzle hub");
@@ -66,6 +71,7 @@ public class MainMenuUI extends Application {
         return mainTittle;
     }
 
+    //EFFECTS: sets up the minesweeper button and returns it
     private Button setMinesweeperButton() {
         Button minesweeperButton = new Button();
         minesweeperButton.setText("Play minesweeper");
@@ -78,6 +84,7 @@ public class MainMenuUI extends Application {
         return minesweeperButton;
     }
 
+    //EFFECTS: sets up the sudoku button and returns it
     private Button setSudokuButton() {
         Button sudokuButton = new Button();
         sudokuButton.setText("Play sudoku");
@@ -90,6 +97,7 @@ public class MainMenuUI extends Application {
         return sudokuButton;
     }
 
+    //EFFECTS: sets up the favourite list button and returns it
     private Button setFavListButton() {
         Button favouriteButton = new Button();
         favouriteButton.setText("Open favourite list");
@@ -100,6 +108,7 @@ public class MainMenuUI extends Application {
         return favouriteButton;
     }
 
+    //EFFECTS: sets up the quit button and returns it
     private Button setQuitButton() {
         Button quitButton = new Button();
         quitButton.setText("Quit");

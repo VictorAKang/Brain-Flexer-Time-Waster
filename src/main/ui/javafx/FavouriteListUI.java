@@ -24,7 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
+// represents the favourite games list ui
 public class FavouriteListUI {
     private static final int GAME_LIST_HEIGHT = 50;
 
@@ -50,6 +50,8 @@ public class FavouriteListUI {
         setupImages();
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the scene and returns it
     protected Scene display(Stage primaryStage) {
         try {
             favList = new FavouriteListReader().read(new File(FavouriteList.FAV_LIST));
@@ -76,6 +78,8 @@ public class FavouriteListUI {
         return favouriteList;
     }
 
+    //MODIFIES: this
+    //EFFECTS: makes the row of for the sudoku game
     private Pane makeSudokuRow(Stage primaryStage) {
         HBox horBox = new HBox(20);
 
@@ -107,6 +111,8 @@ public class FavouriteListUI {
         return horBox;
     }
 
+    //MODIFIES: this
+    //EFFECTS: makes the row for the minesweeper game
     private Pane makeMinesweeperRow(Stage primaryStage) {
         HBox horBox = new HBox(20);
 
@@ -139,6 +145,7 @@ public class FavouriteListUI {
         return horBox;
     }
 
+    //EFFECTS: returns the image that corresponds to the favourite status of given game
     private Image getFavStatusImage(String description) {
 //        ImageView referenceView;
         if (favList.hasGame(description)) {
@@ -151,6 +158,8 @@ public class FavouriteListUI {
         return emptyImage;
     }
 
+    //MODIFIES: this
+    //EFFECTS: updates the star status image of given game
     private void updateStarStatus(String description) {
         if (description.equals("minesweeper")) {
             minesweeperStarStatus.setImage(getFavStatusImage("minesweeper"));
@@ -159,6 +168,8 @@ public class FavouriteListUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the title and the background color
     private void setupTitle() {
         layout.setStyle("-fx-background-color: #0CD2BA;");
 
@@ -174,6 +185,8 @@ public class FavouriteListUI {
         layout.setTop(verBox);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the close button
     private void setupClose() {
         Button closeButton = new Button();
 
@@ -191,6 +204,8 @@ public class FavouriteListUI {
         layout.setBottom(verBox);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up all the images that will be used in the ui 
     private void setupImages() {
         try {
             starInput = new FileInputStream("./data/favouriteListImages/redStar.png");

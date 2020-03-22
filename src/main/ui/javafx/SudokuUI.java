@@ -14,7 +14,7 @@ import model.sudoku.Grid;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-
+// represents the ui for the sudoku game
 public class SudokuUI {
     private static final int CELL_SIDE = 32;
 
@@ -73,6 +73,8 @@ public class SudokuUI {
         setupBoardImage();
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the scene and returns it
     protected Scene display() {
 
         sudokuGrid.resetGame();
@@ -86,6 +88,8 @@ public class SudokuUI {
         return sudokuScene;
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the menu buttons on the top
     private void setMenuField() {
         HBox menuButtons = new HBox(10);
 
@@ -121,6 +125,8 @@ public class SudokuUI {
         layout.setTop(menuButtons);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the field that will make up the sudoku game
     private void setNumberField() {
         StackPane totalPane = new StackPane();
 
@@ -146,6 +152,8 @@ public class SudokuUI {
         layout.setBottom(totalPane);
     }
 
+    //MODIFIES: this
+    //EFFECTS: given the coordinates and the visible value of the cell, returns label or text field
     private Node getCellNode(char c, int i, int j) {
         if (Character.isDigit(c)) {
             Label referenceNode = new Label((String.valueOf(Integer.parseInt((String.valueOf(c))))));
@@ -161,6 +169,8 @@ public class SudokuUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: takes the values in the text fields and updates them to the sudokuGrid
     private void updateGrid() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -172,6 +182,7 @@ public class SudokuUI {
         }
     }
 
+    //EFFECTS: returns the one digit in given text field and returns 0 in case it is not a number
     private int parseTextField(TextField t) {
         String content;
         content = t.getText();
@@ -182,6 +193,8 @@ public class SudokuUI {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the images that will be used
     private void setupBoardImage() {
         try {
             sudokuBoardInput = new FileInputStream("./data/sudokuImages/sudokuBoard.png");

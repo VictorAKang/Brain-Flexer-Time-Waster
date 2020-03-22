@@ -29,6 +29,8 @@ As a user, I would like to see my favourite games list as I left off when reopen
 
 ## Instructions for Grader
 
+Run the MainMenuUI class in the ui.javafx package. 
+
 From the Main Menu you can choose if you want to play **Minesweeper** or **Sudoku**, look into your **Favourite Games 
 List** or simply *Quit* the app. From there, you can follow the instructions in the corresponding section.
 
