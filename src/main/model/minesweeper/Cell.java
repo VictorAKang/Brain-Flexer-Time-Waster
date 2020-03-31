@@ -1,7 +1,5 @@
 package model.minesweeper;
 
-import java.util.jar.JarOutputStream;
-
 // this class represents a single cell of the grid
 // an object of this class stores whether the cell has been opened, if it is a mine, if it is flagged,
 // and how many mines it has adjacent to it (if the cell at question is not a mine)

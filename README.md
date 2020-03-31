@@ -59,3 +59,15 @@ would like to return to the **Main Menu**. The application will save your favour
 only the **Favourite Games List** application but also the **Puzzle Hub** application.
 
 
+## Phase 4
+
+**Phase 4: Task 2**
+
+A Type Hierarchy was already implemented in the form of the Game Interface which has subclasses Minesweeper and Sudoku.
+This was done in phase 1 and therefore has been in the code in all commits done after 12/02/20 4:48. 
+
+The Game super type only exists so that the implementation of the favourite games list, FavouriteList class, would be 
+easier. Minesweeper runs a game of minesweeper and Sudoku runs a game of sudoku when the runGame method is called.
+
+**Phase 4: Task 3**
+
