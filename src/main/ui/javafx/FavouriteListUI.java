@@ -140,7 +140,7 @@ public class FavouriteListUI {
     //EFFECTS: returns the image that corresponds to the favourite status of given game
     private Image getFavStatusImage(String description) {
 //        ImageView referenceView;
-        if (favList.hasGame(description)) {
+        if (favList.containGame(description)) {
 //            referenceView = new ImageView(starImage);
 //            referenceView.setFitHeight(GAME_LIST_HEIGHT);
 //            referenceView.setFitWidth(GAME_LIST_HEIGHT);
