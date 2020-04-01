@@ -14,15 +14,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
-import persistence.FavouriteListReader;
-import ui.menu.FavouriteList;
+import model.FavouriteList;
 import ui.menu.Minesweeper;
 import ui.menu.Sudoku;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 // represents the favourite games list ui
 public class FavouriteListUI {
@@ -53,12 +51,6 @@ public class FavouriteListUI {
     //MODIFIES: this
     //EFFECTS: sets up the scene and returns it
     protected Scene display(Stage primaryStage) {
-        try {
-            favList = new FavouriteListReader().read(new File(FavouriteList.FAV_LIST));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         layout = new BorderPane();
         layout.setMinSize(500,400);
 
@@ -97,10 +89,10 @@ public class FavouriteListUI {
         Button sudokuStatus = new Button("add/remove");
         sudokuStatus.setMinHeight(GAME_LIST_HEIGHT);
         sudokuStatus.setOnAction(e -> {
-            if (favList.hasGame("sudoku")) {
+            if (favList.containGame("sudoku")) {
                 favList.removeFav("sudoku");
             } else {
-                favList.simpleAdd(new Sudoku(1));
+                favList.addGame(new Sudoku(1));
             }
             updateStarStatus("sudoku");
         });
@@ -130,10 +122,10 @@ public class FavouriteListUI {
         Button minesweeperStatus = new Button("add/remove");
         minesweeperStatus.setMinHeight(GAME_LIST_HEIGHT);
         minesweeperStatus.setOnAction(e -> {
-            if (favList.hasGame("minesweeper")) {
+            if (favList.containGame("minesweeper")) {
                 favList.removeFav("minesweeper");
             } else {
-                favList.simpleAdd(new Minesweeper(1));
+                favList.addGame(new Minesweeper(1));
             }
             updateStarStatus("minesweeper");
         });
@@ -192,7 +184,7 @@ public class FavouriteListUI {
 
         closeButton.setText("Close");
         closeButton.setOnAction(e -> {
-            favList.saveFavList(FavouriteList.FAV_LIST);
+            favList.saveFavList();
             MainMenuUI.goBackMainMenu();
         });
 

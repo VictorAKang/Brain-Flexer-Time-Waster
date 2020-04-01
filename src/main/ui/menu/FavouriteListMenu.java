@@ -1,21 +1,19 @@
 package ui.menu;
 
-import persistence.FavouriteListReader;
+import model.FavouriteList;
 import persistence.Saveable;
 import persistence.Writer;
 
 import java.io.*;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 // represents the list of favourite games
-public class FavouriteList implements Saveable {
-    public static final String FAV_LIST = "./data/favouriteList.txt";
+public class FavouriteListMenu {
     Scanner input = new Scanner(System.in);
-    public LinkedList<Game> favList;
+    private FavouriteList favList;
 
-    public FavouriteList() {
-        favList = new LinkedList<>();
+    public FavouriteListMenu() {
+        favList = new FavouriteList();
     }
 
 //    public FavouriteList(int i) {
@@ -32,7 +30,7 @@ public class FavouriteList implements Saveable {
     public void runFavList() throws IOException {
         String stubInput = "";
 
-        this.favList = new FavouriteListReader().read(new File(FAV_LIST)).favList;
+        favList.loadFavList();
 
         while (!stubInput.equals("4")) {
             printList();
@@ -57,7 +55,7 @@ public class FavouriteList implements Saveable {
             }
         }
 
-        saveFavList(FAV_LIST);
+        favList.saveFavList();
     }
 
     //MODIFIES: this
@@ -69,12 +67,12 @@ public class FavouriteList implements Saveable {
         System.out.println("Which game would you like to play? ");
         num = input.nextInt();
 
-        if (num < 1 || num > favList.size() + 1) {
+        if (num < 1 || num > favList.getSizeFavList() + 1) {
             System.out.println("invalid input...");
             runFav();
         }
 
-        favList.get(num - 1).runGame(1);
+        favList.getGame(num - 1).runGame(1);
     }
 
     //MODIFIES: this
@@ -96,12 +94,12 @@ public class FavouriteList implements Saveable {
         }
 
         if (gameName.equals("s")) {
-            if (!containGame("sudoku")) {
-                favList.add(new Sudoku(1));
+            if (!favList.containGame("sudoku")) {
+                favList.addGame(new Sudoku(1));
             }
         } else if (gameName.equals("m")) {
-            if (!containGame("minesweeper")) {
-                favList.add(new Minesweeper(1));
+            if (!favList.containGame("minesweeper")) {
+                favList.addGame(new Minesweeper(1));
             }
         }
     }
@@ -116,7 +114,7 @@ public class FavouriteList implements Saveable {
         System.out.println("Which game would you like to remove? (0 to cancel)");
         number = input.nextInt();
 
-        if (number < 0 || number > favList.size()) {
+        if (number < 0 || number > favList.getSizeFavList()) {
             System.out.println("invalid input...");
             removeFav();
         }
@@ -125,13 +123,13 @@ public class FavouriteList implements Saveable {
             return;
         }
 
-        favList.remove(number - 1);
+        favList.removeFav(number - 1);
     }
 
     public void removeFav(String description) {
-        for (int i = 0; i < favList.size(); i++) {
-            if (favList.get(i).getDescription().equals(description)) {
-                favList.remove(i);
+        for (int i = 0; i < favList.getSizeFavList(); i++) {
+            if (favList.getGame(i).getDescription().equals(description)) {
+                favList.removeFav(i);
                 return;
             }
         }
@@ -141,55 +139,55 @@ public class FavouriteList implements Saveable {
     public void printList() {
         System.out.println("List of Favourite Games:");
         System.out.println("-----------------------------------------------------");
-        for (int i = 0; i < favList.size(); i++) {
-            System.out.println((i + 1) + " - " + favList.get(i).getDescription());
+        for (int i = 0; i < favList.getSizeFavList(); i++) {
+            System.out.println((i + 1) + " - " + favList.getGame(i).getDescription());
         }
         System.out.println();
     }
 
-    //EFFECTS: returns true if the game with inputted description is in list
-    //         else, return false
-    public boolean containGame(String s) {
-        for (int i = 0; i < favList.size(); i++) {
-            if (favList.get(i).getDescription().equals(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void save(PrintWriter printWriter) {
-        for (Game g: favList) {
-            printWriter.println(g.getDescription());
-        }
-    }
-
-    // EFFECTS: saves state of the favourite list in FAV_LIST
-    public void saveFavList(String s) {
-        try {
-            Writer writer = new Writer(new File(s));
-            writer.write(this);
-            writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to save accounts to " + FAV_LIST);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //MODIFIES: this
-    //EFFECTS: straight forward add inputted game into the list
-    public void simpleAdd(Game g) {
-        favList.add(g);
-    }
-
-    public boolean hasGame(String description) {
-        for (Game g: favList) {
-            if (g.getDescription().equals(description)) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    //EFFECTS: returns true if the game with inputted description is in list
+//    //         else, return false
+//    public boolean containGame(String s) {
+//        for (int i = 0; i < favList.getSizeFavList(); i++) {
+//            if (favList.getGame(i).getDescription().equals(s)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    @Override
+//    public void save(PrintWriter printWriter) {
+//        for (Game g: favList) {
+//            printWriter.println(g.getDescription());
+//        }
+//    }
+//
+//    // EFFECTS: saves state of the favourite list in FAV_LIST
+//    public void saveFavList(String s) {
+//        try {
+//            Writer writer = new Writer(new File(s));
+//            writer.write(this);
+//            writer.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to save accounts to " + FAV_LIST);
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    //MODIFIES: this
+//    //EFFECTS: straight forward add inputted game into the list
+//    public void simpleAdd(Game g) {
+//        favList.add(g);
+//    }
+//
+//    public boolean hasGame(String description) {
+//        for (Game g: favList) {
+//            if (g.getDescription().equals(description)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }

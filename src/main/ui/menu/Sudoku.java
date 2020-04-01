@@ -53,7 +53,6 @@ public class Sudoku implements Game {
     //EFFECTS: asks the user to input the value to be inputted into a cell
     //         and reads that input
     private int askValue() {
-        //TODO implement exception in case a string is inputted here
         Scanner input = new Scanner(System.in);
         int value;
 
@@ -72,7 +71,6 @@ public class Sudoku implements Game {
     //EFFECTS: asks the user to input the value of the y coordinate of the cell he/she wants to change
     //         and reads that input
     private int askCoordinateY() {
-        //TODO implement exception in case a string is inputted here
         Scanner input = new Scanner(System.in);
         int coordinateY;
 

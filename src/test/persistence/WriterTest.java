@@ -1,8 +1,9 @@
 package persistence;
 
+import model.FavouriteList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.menu.FavouriteList;
+import ui.menu.FavouriteListMenu;
 import ui.menu.Minesweeper;
 
 import java.io.File;
@@ -16,16 +17,20 @@ public class WriterTest {
 
     @BeforeEach
     public void setup() {
-        favList = new FavouriteList();
-        favList.simpleAdd(new Minesweeper(1));
+        try {
+            favList = new FavouriteList("");
+        } catch (IOException e) {
+            fail();
+        }
+        favList.addGame(new Minesweeper(1));
     }
 
     @Test
     public void writeFavouriteListTest() {
-        favList.saveFavList(TEST_FILE);
+        favList.saveFavListOtherFile(TEST_FILE);
 
         try {
-            FavouriteList testList = new FavouriteListReader().read(new File(TEST_FILE));
+            FavouriteList testList = new FavouriteList(TEST_FILE);
             assertTrue(testList.containGame("minesweeper"));
             assertFalse(testList.containGame("sudoku"));
         } catch (IOException e) {

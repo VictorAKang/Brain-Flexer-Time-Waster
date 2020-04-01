@@ -34,6 +34,7 @@ public class Cell {
         if (visibleValue == 0) {
             return " ";
         }
+
         return Integer.toString(visibleValue);
     }
 

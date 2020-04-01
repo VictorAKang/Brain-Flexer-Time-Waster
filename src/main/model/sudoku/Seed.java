@@ -9,6 +9,7 @@ public class Seed {
     String actualSeed;
     String visibleSeed;
     Random rand = new Random();
+    SeedBank bank;
 
     //MODIFIES: this
     //EFFECTS: assigns a value to the seed
@@ -20,7 +21,7 @@ public class Seed {
     //MODIFIES: this
     //EFFECTS: gets a seed from the bank and randomizes it
     public Seed() {
-        SeedBank bank = new SeedBank();
+        bank = new SeedBank();
         randomizeSeed(bank.getSeed());
     }
 

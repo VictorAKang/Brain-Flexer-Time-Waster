@@ -80,8 +80,6 @@ public class Minesweeper implements Game {
         }
 
         coordinateY = (int)stringCoordinateY.charAt(0) - (int)'1';
-//
-//        coordinateY = input.nextInt() - 1;
 
         if (coordinateY > Grid.LONG_SIDE - 1 || coordinateY < 0) {
             System.out.println(coordinateY);
@@ -133,8 +131,6 @@ public class Minesweeper implements Game {
         return askCommand();
     }
 
-    //
-    //TODO add conditions to guarantee that the command can be executed
     public void runCommand(int coordinateX, int coordinateY, String command) {
         if (command.equals("open")) {
             isGameOver = map.openCell(coordinateX, coordinateY);

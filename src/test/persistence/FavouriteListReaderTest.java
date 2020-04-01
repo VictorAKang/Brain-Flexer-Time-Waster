@@ -1,7 +1,7 @@
 package persistence;
 
+import model.FavouriteList;
 import org.junit.jupiter.api.Test;
-import ui.menu.FavouriteList;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,46 +12,47 @@ public class FavouriteListReaderTest {
 
     @Test
     public void favouriteListReaderTest0() {
+        FavouriteList favList = null;
         try {
-            FavouriteList favList = new FavouriteListReader().read(new File("./data/testFavouriteList0.txt"));
-            assertFalse(favList.containGame("minesweeper"));
-            assertFalse(favList.containGame("sudoku"));
+            favList = new FavouriteList("./data/testFavouriteList0.txt");
         } catch (IOException e) {
-            fail("unexpected IOException");
+            e.printStackTrace();
         }
-
+        assertFalse(favList.containGame("minesweeper"));
+        assertFalse(favList.containGame("sudoku"));
     }
 
     @Test
     public void favouriteListReaderTest1() {
+        FavouriteList favList = null;
         try {
-            FavouriteList favList = new FavouriteListReader().read(new File("./data/testFavouriteList1.txt"));
-            assertTrue(favList.containGame("sudoku"));
-            assertFalse(favList.containGame("minesweeper"));
-            assertEquals("sudoku", favList.favList.get(0).getDescription());
+            favList = new FavouriteList("./data/testFavouriteList1.txt");
         } catch (IOException e) {
-            fail("unexpected IOException");
+            e.printStackTrace();
         }
+        assertTrue(favList.containGame("sudoku"));
+        assertFalse(favList.containGame("minesweeper"));
+        assertEquals("sudoku", favList.getGame(0).getDescription());
     }
 
     @Test
     public void favouriteListReaderTest2() {
+        FavouriteList favList = null;
         try {
-            FavouriteList favList = new FavouriteListReader().read(new File("./data/testFavouriteList2.txt"));
-            assertTrue(favList.containGame("minesweeper"));
-            assertTrue(favList.containGame("sudoku"));
-            assertEquals("sudoku", favList.favList.get(0).getDescription());
-            assertEquals("minesweeper", favList.favList.get(1).getDescription());
+            favList = new FavouriteList("./data/testFavouriteList2.txt");
         } catch (IOException e) {
-            fail("unexpected IOException");
+            e.printStackTrace();
         }
+        assertTrue(favList.containGame("minesweeper"));
+        assertTrue(favList.containGame("sudoku"));
+        assertEquals("sudoku", favList.getGame(0).getDescription());
+        assertEquals("minesweeper", favList.getGame(1).getDescription());
     }
 
     @Test
     public void testIOException() {
         try {
-            FavouriteList testList = new FavouriteListReader().read(new
-                    File("./path/does/not/exist/testAccount.txt"));
+            FavouriteList testList = new FavouriteList("./path/does/not/exist/testAccount.txt");
         } catch (IOException e) {
             // expected
         }

@@ -211,18 +211,20 @@ public class Grid {
 
     //EFFECTS: returns true if cell is flagged
     public boolean isFlagged(int coordinateI, int coordinateJ) throws OutOfRangeException {
-        if (coordinateI >= LONG_SIDE || coordinateJ >= SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
-            throw new OutOfRangeException();
-        }
+        checkCoordinatesRange(coordinateI, coordinateJ);
 
         return grid[coordinateI][coordinateJ].isFlagged();
     }
 
-    //EFFECTS: return true if cell is a mine
-    public boolean isMine(int coordinateI, int coordinateJ) throws OutOfRangeException {
+    private void checkCoordinatesRange(int coordinateI, int coordinateJ) {
         if (coordinateI >= LONG_SIDE || coordinateJ >= SHORT_SIDE || coordinateI < 0 || coordinateJ < 0) {
             throw new OutOfRangeException();
         }
+    }
+
+    //EFFECTS: return true if cell is a mine
+    public boolean isMine(int coordinateI, int coordinateJ) throws OutOfRangeException {
+        checkCoordinatesRange(coordinateI, coordinateJ);
 
         return grid[coordinateI][coordinateJ].getIsMine();
     }

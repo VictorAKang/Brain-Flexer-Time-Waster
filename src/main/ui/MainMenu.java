@@ -1,6 +1,6 @@
 package ui;
 
-import ui.menu.FavouriteList;
+import ui.menu.FavouriteListMenu;
 import ui.menu.Minesweeper;
 import ui.menu.Sudoku;
 
@@ -11,11 +11,11 @@ import java.util.Scanner;
 public class MainMenu {
     int option;
     boolean keepGoing;
-    FavouriteList fav;
+    FavouriteListMenu fav;
 
     public MainMenu() {
         keepGoing = true;
-        fav = new FavouriteList();
+        fav = new FavouriteListMenu();
 
         while (keepGoing) {
             option = askOption();

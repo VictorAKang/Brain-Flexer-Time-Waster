@@ -71,3 +71,18 @@ easier. Minesweeper runs a game of minesweeper and Sudoku runs a game of sudoku 
 
 **Phase 4: Task 3**
 
+In general, the FavouriteList functionality of the program was badly implemented. 
+
+The ui.menu.FavouriteListMenu class has low cohesion as its functionality as the favourite list is in the same class as the 
+ui part of it. For this change, I will create a new class in the model package with only the functionality of storing the
+list of favourite games.
+
+Since the ui and favourite list functionalities were mixed, a problem arose at ui.javafx.FavouriteListUI as some methods
+required a simple change in the favourite list without the ui part. This ended up requiring the creation of some helper
+methods that should be there from the start. These methods will be implemented in the new FavouriteList class in the model
+package.
+
+The final change will regard the Reader for FavouriteList. This change has the idea of reducing coupling by making all the
+persistence functionalities tied to the FavouriteList itself instead of making classes call Readers on their own. This 
+change will require for me to change not only the Reader class itself (so that it does not return a FavouriteList but 
+its fields) but also make a read/load method withing FavouriteList.
