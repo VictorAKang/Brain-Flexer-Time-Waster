@@ -17,10 +17,9 @@ import javafx.stage.Stage;
 import model.FavouriteList;
 import ui.menu.Minesweeper;
 import ui.menu.Sudoku;
-
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
 
 // represents the favourite games list ui
 public class FavouriteListUI {
@@ -28,20 +27,15 @@ public class FavouriteListUI {
 
     private static FileInputStream starInput;
     private static FileInputStream emptyInput;
-
     private static Image starImage;
     private static Image emptyImage;
-
     private static ImageView minesweeperStarStatus = new ImageView();
     private static ImageView sudokuStarStatus = new ImageView();
-
-    protected static FavouriteList favList;
+    protected static FavouriteList favList = new FavouriteList();
     protected static MinesweeperUI minesweeper = new MinesweeperUI();
     protected static SudokuUI sudoku = new SudokuUI();
-
     private static Label title;
     private static BorderPane layout;
-
     private static Scene favouriteList;
 
     public FavouriteListUI() {
@@ -53,19 +47,13 @@ public class FavouriteListUI {
     protected Scene display(Stage primaryStage) {
         layout = new BorderPane();
         layout.setMinSize(500,400);
-
         setupTitle();
         setupClose();
-
         VBox gamesList = new VBox(50);
-
         Node minesweeper = makeMinesweeperRow(primaryStage);
         Node sudoku = makeSudokuRow(primaryStage);
-
         gamesList.getChildren().addAll(minesweeper,sudoku);
-
         layout.setCenter(gamesList);
-
         favouriteList = new Scene(layout);
         return favouriteList;
     }
@@ -77,15 +65,12 @@ public class FavouriteListUI {
 
         ImageView blankSpace = new ImageView();
         blankSpace.setFitWidth(50);
-
         Label sudokuLabel = new Label("Sudoku");
         sudokuLabel.setMinWidth(100);
         sudokuLabel.setMinHeight(GAME_LIST_HEIGHT);
-
         Button sudokuPlay = new Button("play");
         sudokuPlay.setMinHeight(GAME_LIST_HEIGHT);
         sudokuPlay.setOnAction(e -> primaryStage.setScene(sudoku.display()));
-
         Button sudokuStatus = new Button("add/remove");
         sudokuStatus.setMinHeight(GAME_LIST_HEIGHT);
         sudokuStatus.setOnAction(e -> {
@@ -96,9 +81,7 @@ public class FavouriteListUI {
             }
             updateStarStatus("sudoku");
         });
-
         sudokuStarStatus.setImage(getFavStatusImage("sudoku"));
-
         horBox.getChildren().addAll(blankSpace,sudokuLabel,sudokuPlay,sudokuStatus,sudokuStarStatus);
         return horBox;
     }
@@ -110,15 +93,12 @@ public class FavouriteListUI {
 
         ImageView blankSpace = new ImageView();
         blankSpace.setFitWidth(50);
-
         Label minesweeperLabel = new Label("Minesweeper");
         minesweeperLabel.setMinWidth(100);
         minesweeperLabel.setMinHeight(GAME_LIST_HEIGHT);
-
         Button minesweeperPlay = new Button("play");
         minesweeperPlay.setMinHeight(GAME_LIST_HEIGHT);
         minesweeperPlay.setOnAction(e -> primaryStage.setScene(minesweeper.display()));
-
         Button minesweeperStatus = new Button("add/remove");
         minesweeperStatus.setMinHeight(GAME_LIST_HEIGHT);
         minesweeperStatus.setOnAction(e -> {
@@ -129,9 +109,7 @@ public class FavouriteListUI {
             }
             updateStarStatus("minesweeper");
         });
-
         minesweeperStarStatus.setImage(getFavStatusImage("minesweeper"));
-
         horBox.getChildren()
                 .addAll(blankSpace,minesweeperLabel,minesweeperPlay,minesweeperStatus,minesweeperStarStatus);
         return horBox;
@@ -139,11 +117,12 @@ public class FavouriteListUI {
 
     //EFFECTS: returns the image that corresponds to the favourite status of given game
     private Image getFavStatusImage(String description) {
-//        ImageView referenceView;
-        if (favList.hasGame(description)) {
-//            referenceView = new ImageView(starImage);
-//            referenceView.setFitHeight(GAME_LIST_HEIGHT);
-//            referenceView.setFitWidth(GAME_LIST_HEIGHT);
+//        //        ImageView referenceView;
+////        if (favList.containGame(description)) {
+//        if (favList.containGame(description)) {
+//            return starImage;
+//        }
+        if (favList.containGame(description)) {
             return starImage;
         }
 
@@ -168,8 +147,6 @@ public class FavouriteListUI {
         title = new Label();
         title.setText("Favourite Games List");
         title.setFont(Font.font("Heveltica", FontPosture.ITALIC,30));
-
-
         VBox verBox = new VBox();
         verBox.setMinHeight(100);
         verBox.setAlignment(Pos.CENTER);
@@ -187,12 +164,10 @@ public class FavouriteListUI {
             favList.saveFavList();
             MainMenuUI.goBackMainMenu();
         });
-
         VBox verBox = new VBox();
         verBox.setMinHeight(50);
         verBox.setAlignment(Pos.CENTER);
         verBox.getChildren().add(closeButton);
-
         layout.setBottom(verBox);
     }
 
@@ -205,13 +180,10 @@ public class FavouriteListUI {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         starImage = new Image(starInput);
         emptyImage = new Image(emptyInput);
-
         minesweeperStarStatus.setFitWidth(GAME_LIST_HEIGHT);
         minesweeperStarStatus.setFitHeight(GAME_LIST_HEIGHT);
-
         sudokuStarStatus.setFitHeight(GAME_LIST_HEIGHT);
         sudokuStarStatus.setFitWidth(GAME_LIST_HEIGHT);
 //
