@@ -11,6 +11,8 @@ import java.util.LinkedList;
 public class FavouriteList implements Saveable {
     public static final String FAV_LIST = "./data/favouriteList.txt";
     private LinkedList<Game> favList;
+    private static Writer writer;
+    private static FavouriteListReader reader = new FavouriteListReader();
 
     // constructor that should be called throughout the code
     public FavouriteList() {
@@ -69,7 +71,7 @@ public class FavouriteList implements Saveable {
     // EFFECTS: saves state of the favourite list in FAV_LIST
     public void saveFavList() {
         try {
-            Writer writer = new Writer(new File(FAV_LIST));
+            writer = new Writer(new File(FAV_LIST));
             writer.write(this);
             writer.close();
         } catch (FileNotFoundException e) {
@@ -82,7 +84,7 @@ public class FavouriteList implements Saveable {
     // EFFECTS: saves state of the favourite list in path
     public void saveFavListOtherFile(String path) {
         try {
-            Writer writer = new Writer(new File(path));
+            writer = new Writer(new File(path));
             writer.write(this);
             writer.close();
         } catch (FileNotFoundException e) {
@@ -96,7 +98,7 @@ public class FavouriteList implements Saveable {
     //EFFECTS: loads the favourite list from the previous section
     public void loadFavList() {
         try {
-            favList = new FavouriteListReader().readList(new File(FAV_LIST));
+            favList = reader.readList(new File(FAV_LIST));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,7 +107,7 @@ public class FavouriteList implements Saveable {
     //MODIFIES: this
     //EFFECTS: loads the favourite from given path
     private void loadFavList(String path) throws IOException {
-        favList = new FavouriteListReader().readList(new File(path));
+        favList = reader.readList(new File(path));
     }
 
     //EFFECTS: returns the size of the favList

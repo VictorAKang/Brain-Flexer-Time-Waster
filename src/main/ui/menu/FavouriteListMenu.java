@@ -182,7 +182,7 @@ public class FavouriteListMenu {
 //        favList.add(g);
 //    }
 //
-//    public boolean hasGame(String description) {
+//    public boolean Game(String description) {
 //        for (Game g: favList) {
 //            if (g.getDescription().equals(description)) {
 //                return true;
