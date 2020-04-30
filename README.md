@@ -1,40 +1,23 @@
-# Puzzle Hub
+# Brain-Flexer or Time-Waster
 
-## A brief description 
+A Hub for all the minigames that I coded for fun. The hub contains for now Minesweeper and Sudoku games, with minesweeper generating itself randomly each playthrough and sudoku board taken from a preset database. The games can be run on an application or on the terminal console.
 
-In an attempt to find quick games for me to play while waiting on line or just procrastinating, I decided to develop 
-this application. This application is a hub where one can entertain oneself by playing puzzle games that are *randomly*
- generated while waiting for time to pass.
+## How to run the code
 
-The choices of games are (for now):
-- Sudoku
-- Minesweeper
+**Running the console based version**
 
-## Stories
+Follow the path src/main/ui and run the Main class to start the application. 
 
-As a user, I would like to be able to play a randomly generated minesweeper game.
-As a user, I would like to be able to open or flag a cell in minesweeper.
-As a user, I would like to lose the game if I open a mine cell in minesweeper.
-As a user, I would like to win the game if I correctly identify all mines in minesweeper.
+**Running the application based version**
 
-As a user, I would like to be able to play sudoku.
-As a user, I would like to be able to attribute values to cells in sudoku.
-As a user, I would like to win the game if I correctly identify the value of all cells in sudoku.
+Follow the path src/main/ui/javafx and run the MainMenuUI class to start the application. 
 
-As a user, I would like to be able to choose the game I am playing and switch between them.
-As a user, I would like to be able to see my favourite games list and add new games to it and remove games from it.
-
-As a user, I would like to be able to have my favourite games list saved.
-As a user, I would like to see my favourite games list as I left off when reopening the app.
-
-## Instructions for Grader
-
-Run the MainMenuUI class in the ui.javafx package. 
+Main Menu
 
 From the Main Menu you can choose if you want to play **Minesweeper** or **Sudoku**, look into your **Favourite Games 
 List** or simply *Quit* the app. From there, you can follow the instructions in the corresponding section.
 
-**Minesweeper**
+Minesweeper
 
 Play the game as if it were normal **Minesweeper**! For you to flag the bombs, click on *flag* to activate flag mode and from 
 now on your clicks will flag cells. Cells that are flagged will not be opened by normal clicks anymore. For you to 
@@ -43,7 +26,7 @@ click a mine, the game will be deactivated and all cells that were bombs and wer
 to restart the game by generating a new board, click the *reset* button. For you to go back to the **Main Menu**, click on
 the *close* button.
 
-**Sudoku**
+Sudoku
 
 Might not look pretty but take it as an extra challenge, same rules of **sudoku** but with an ugly board. Click on the cells 
 that you would like to change and edit the number to the one you would like. If you think that you are done, click the 
@@ -51,38 +34,10 @@ that you would like to change and edit the number to the one you would like. If 
 board, click on the *reset* button. If you want to close the game and go back to the **Main Menu**, click on the *close* 
 button.
 
-**Favourite Games List**
+Favourite Games List
 
 A very simple application that will mark your favourite games with a star. Click on the *add/remove* button to add or 
 remove the star. Click on the *play* button if you would like to play the selected game. Click on the *close* button if you
 would like to return to the **Main Menu**. The application will save your favourite games for the next time you open not
 only the **Favourite Games List** application but also the **Puzzle Hub** application.
 
-
-## Phase 4
-
-**Phase 4: Task 2**
-
-A Type Hierarchy was already implemented in the form of the Game Interface which has subclasses Minesweeper and Sudoku.
-This was done in phase 1 and therefore has been in the code in all commits done after 12/02/20 4:48. 
-
-The Game super type only exists so that the implementation of the favourite games list, FavouriteList class, would be 
-easier. Minesweeper runs a game of minesweeper and Sudoku runs a game of sudoku when the runGame method is called.
-
-**Phase 4: Task 3**
-
-In general, the FavouriteList functionality of the program was badly implemented. 
-
-The ui.menu.FavouriteListMenu class has low cohesion as its functionality as the favourite list is in the same class as the 
-ui part of it. For this change, I will create a new class in the model package with only the functionality of storing the
-list of favourite games.
-
-Since the ui and favourite list functionalities were mixed, a problem arose at ui.javafx.FavouriteListUI as some methods
-required a simple change in the favourite list without the ui part. This ended up requiring the creation of some helper
-methods that should be there from the start. These methods will be implemented in the new FavouriteList class in the model
-package.
-
-The final change will regard the Reader for FavouriteList. This change has the idea of reducing coupling by making all the
-persistence functionalities tied to the FavouriteList itself instead of making classes call Readers on their own. This 
-change will require for me to change not only the Reader class itself (so that it does not return a FavouriteList but 
-its fields) but also make a read/load method withing FavouriteList.
