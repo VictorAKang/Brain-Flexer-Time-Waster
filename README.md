@@ -41,3 +41,6 @@ remove the star. Click on the *play* button if you would like to play the select
 would like to return to the **Main Menu**. The application will save your favourite games for the next time you open not
 only the **Favourite Games List** application but also the **Puzzle Hub** application.
 
+## Audio Credits
+
+Main Menu background music: www.bensound.com

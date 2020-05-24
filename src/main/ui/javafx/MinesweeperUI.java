@@ -8,9 +8,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
 import model.minesweeper.Grid;
+import ui.audioPlayer.AudioPlayer;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // the ui part of the minesweeper game
@@ -41,6 +45,8 @@ public class MinesweeperUI {
     private static Image eightTile;
     private static Image mineTile;
 
+    private static final String bombSoundFile = "./data/audio/Bomb.mp3";
+    private static Media bombSound;
 
     private static final int CELL_SIDE = 32;
 
@@ -52,6 +58,7 @@ public class MinesweeperUI {
 
     private static BorderPane layout;
     private static Scene minesweeperScene;
+    private static AudioPlayer soundPlayer = new AudioPlayer();
 
     public MinesweeperUI() {
         setupImageInputs();
@@ -199,6 +206,7 @@ public class MinesweeperUI {
         if (!stubVar) {
             refreshDisplay();
         } else if (minesweeperGrid.isMine(coordinateI, coordinateJ)) {
+            //soundPlayer.playAudio(bombSoundFile);
             disableAllButton();
         }
     }
@@ -350,90 +358,3 @@ public class MinesweeperUI {
         return 0;
     }
 }
-
-
-//        if (!minesweeperGrid.isFlagged(coordinateI,coordinateJ)) {
-//            if (minesweeperGrid.isMine(coordinateI,coordinateJ)) {
-//                //System.out.println("is mine");
-//                disableAllButton();
-//            } else {
-//                setButtonNumber(b,coordinateI,coordinateJ);
-//            }
-//        } else {
-//            System.out.println("a");
-//        }
-
-
-//    private void openButton(Button b) {
-//        int coordinateI = findIButton(b);
-//        int coordinateJ = findJButton(b);
-//
-//        //System.out.println(minesweeperGrid.isFlagged(coordinateI,coordinateJ));
-//
-//        if (!minesweeperGrid.isFlagged(coordinateI,coordinateJ)) {
-//            if (minesweeperGrid.isMine(coordinateI,coordinateJ)) {
-//                //System.out.println("is mine");
-//                disableAllButton();
-//            } else {
-//                setButtonNumber(b,coordinateI,coordinateJ);
-//            }
-//        } else {
-//            System.out.println("a");
-//        }
-//    }
-//
-//    private void setButtonNumber(Button b, int coordinateI, int coordinateJ) {
-//        minesweeperGrid.setOpen(coordinateI,coordinateJ);
-//        setButtonNumberImage(b,coordinateI,coordinateJ);
-//        setAdjacentNumber(coordinateI, coordinateJ);
-//    }
-//
-//    private void setButtonNumberImage(Button b, int coordinateI, int coordinateJ) {
-//        b.setDisable(true);
-//        int number = minesweeperGrid.getNumber(coordinateI,coordinateJ);
-//        ImageView referenceView;
-//        referenceView = numberToImageView(number);
-//        b.setGraphic(referenceView);
-//    }
-//
-//    private void setAdjacentNumber(int coordinateI, int coordinateJ) {
-//        if (minesweeperGrid.getNumber(coordinateI,coordinateJ) == 0) {
-//            int minI = coordinateI - 1;
-//            int maxI = coordinateI + 1;
-//            int minJ = coordinateJ - 1;
-//            int maxJ = coordinateJ + 1;
-//
-//            if (coordinateI == 0) {
-//                minI = coordinateI;
-//            } else if (coordinateI == Grid.LONG_SIDE - 1) {
-//                maxI = coordinateI;
-//            }
-//
-//            if (coordinateJ == 0) {
-//                minJ = coordinateJ;
-//            } else if (coordinateJ == Grid.SHORT_SIDE - 1) {
-//                maxJ = coordinateJ;
-//            }
-//
-//            System.out.println(minesweeperGrid.getIsOpen(minI, coordinateJ));
-//            openAdjacentHelper(coordinateI,coordinateJ,minI,maxI,minJ,maxJ);
-//        }
-//    }
-//
-//    private void openAdjacentHelper(int coordinateI, int coordinateJ, int minI, int maxI, int minJ, int maxJ) {
-//        for (int i = minI; i <= maxI; i++) {
-//            for (int j = minJ; j <= maxJ; j++) {
-//                //System.out.println(!minesweeperGrid.getIsOpen(coordinateI, coordinateJ));
-////                if (i == minI && j == coordinateJ) {
-////                    System.out.println(minesweeperGrid.getIsOpen(i, j));
-////                    System.out.println(!(i == coordinateI && j == coordinateJ));
-////                }
-//               if (!((i == coordinateI && j == coordinateJ) && minesweeperGrid.getIsOpen(coordinateI, coordinateJ))) {
-//                    minesweeperGrid.setOpen(i, j);
-//                    setButtonNumber(buttonField[i][j], i, j);
-//                    //setAdjacentNumber(i, j);
-//                }
-//            }
-//        }
-//    }
-
